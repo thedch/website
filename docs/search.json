@@ -1,10 +1,10 @@
 [
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
+    "objectID": "posts/post-with-code/post.html",
+    "href": "posts/post-with-code/post.html",
+    "title": "Jupyter Testing",
     "section": "",
-    "text": "This is a post with executable code."
+    "text": "import sys\nsys.executable\n\n'/Users/daniel.hunter/miniconda3/bin/python'\n\n\n\n2+2\n\n4"
   },
   {
     "objectID": "posts/deep-dream/post.html",
@@ -32,6 +32,6 @@
     "href": "blog.html",
     "title": "myblog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\n\n\n\n\n\n\nNov 4, 2022\n\n\nDaniel Hunter\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 1, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeep Dream\n\n\n\n\n\nThis is a test post. In this post, I try out different functionalities\n\n\n\n\n\n\nOct 5, 2022\n\n\n\n\n\n\nNo matching items"
+    "text": "Jupyter Testing\n\n\n\n\n\n\n\n\n\n\n\n\nNov 4, 2022\n\n\nDaniel Hunter\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\n\n\nNov 1, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDeep Dream\n\n\n\n\n\nReviving Deep Dream\n\n\n\n\n\n\nOct 5, 2022\n\n\n\n\n\n\nNo matching items"
   }
 ]

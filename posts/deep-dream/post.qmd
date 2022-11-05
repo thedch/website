@@ -2,7 +2,7 @@
 title: 'Deep Dream'
 date: '2022-10-05'
 # categories: ['123', 'Second Tag']
-description: 'This is a test post. In this post, I try out different functionalities'
+description: 'Reviving Deep Dream'
 execute: 
   message: false
   warning: false
