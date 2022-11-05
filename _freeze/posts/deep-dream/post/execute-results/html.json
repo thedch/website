@@ -1,0 +1,11 @@
+{
+  "hash": "3a1456434f612cbdd6526085d3e1f633",
+  "result": {
+    "markdown": "---\ntitle: 'Deep Dream'\ndate: '2022-10-05'\n# categories: ['123', 'Second Tag']\ndescription: 'This is a test post. In this post, I try out different functionalities'\nexecute: \n  message: false\n  warning: false\neditor_options: \n  chunk_output_type: console\n---\n\n# Heading 1\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit est nec dui eleifend, at dictum elit ullamcorper. Aliquam feugiat dictum bibendum. Praesent fermentum laoreet quam, cursus volutpat odio dapibus in. Fusce luctus porttitor vehicula. Donec ac tortor nisi. Donec at lectus tortor. Morbi tempor, nibh non euismod viverra, metus arcu aliquet elit, sed fringilla urna leo vel purus. \n\n## Merriweather\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit est nec dui eleifend, at dictum elit ullamcorper. **Aliquam feugiat dictum bibendum.** Praesent fermentum laoreet quam, cursus volutpat odio dapibus in. [Fusce luctus](https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss) porttitor vehicula. Donec ac tortor nisi. Donec at lectus tortor. Morbi tempor, nibh non euismod viverra, metus arcu aliquet elit, sed fringilla urna leo vel purus.\n\n### 3 - Code\n\nThis is `inline` code plus a small code chunk.\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\n2 + 2\n```\n\n::: {.cell-output .cell-output-display execution_count=1}\n```\n4\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "post_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}
