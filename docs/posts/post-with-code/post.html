@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Daniel Hunter">
+<meta name="author" content="Daniel">
 <meta name="dcterms.date" content="2022-11-04">
+<meta name="description" content="Reviving Deep Dream">
 
 <title>Letters to my past self - Jupyter Testing</title>
 <style>
@@ -123,6 +124,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -169,7 +174,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Jupyter Testing</h1>
-                      </div>
+                  <div>
+        <div class="description">
+          Reviving Deep Dream
+        </div>
+      </div>
+                </div>
   </div>
     
   
@@ -178,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Daniel Hunter </p>
+               <p>Daniel </p>
             </div>
     </div>
       
@@ -203,17 +213,184 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<div class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>sys.executable</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="1">
-<pre><code>'/Users/daniel.hunter/miniconda3/bin/python'</code></pre>
+<div class="cell" data-execution_count="211">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pwd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/Users/daniel.hunter/code/myblog/posts/post-with-code</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="op">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
-<pre><code>4</code></pre>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> Image.<span class="bu">open</span>(Path.home() <span class="op">/</span> <span class="st">'Downloads'</span> <span class="op">/</span> <span class="st">'AvatarAI.me'</span> <span class="op">/</span> <span class="st">'61.jpg'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="84">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>img</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="84">
+<p><img src="post_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> transforms</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>mean <span class="op">=</span> np.array([<span class="fl">0.485</span>, <span class="fl">0.456</span>, <span class="fl">0.406</span>])</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>std <span class="op">=</span> np.array([<span class="fl">0.229</span>, <span class="fl">0.224</span>, <span class="fl">0.225</span>])</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>preprocess <span class="op">=</span> transforms.Compose([transforms.ToTensor(), transforms.Normalize(mean, std)])</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deprocess(image_np):</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    image_np <span class="op">=</span> image_np.squeeze().transpose(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    image_np <span class="op">=</span> image_np <span class="op">*</span> std.reshape((<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>)) <span class="op">+</span> mean.reshape((<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    image_np <span class="op">=</span> np.clip(image_np, <span class="fl">0.0</span>, <span class="fl">255.0</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_np</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> clip(image_tensor):</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>        m, s <span class="op">=</span> mean[c], std[c]</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        image_tensor[<span class="dv">0</span>, c] <span class="op">=</span> torch.clamp(image_tensor[<span class="dv">0</span>, c], <span class="op">-</span>m <span class="op">/</span> s, (<span class="dv">1</span> <span class="op">-</span> m) <span class="op">/</span> s)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image_tensor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="208">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch.autograd <span class="im">import</span> Variable</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tqdm.auto <span class="im">import</span> tqdm</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.ndimage <span class="im">as</span> nd</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> dream(image, model, iterations, lr):</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" Updates the image to maximize outputs for n iterations """</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    Tensor <span class="op">=</span> torch.cuda.FloatTensor <span class="cf">if</span> torch.cuda.is_available() <span class="cf">else</span> torch.FloatTensor</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> Variable(Tensor(image), requires_grad<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(iterations):</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>        model.zero_grad()</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        out <span class="op">=</span> model(image)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="co"># label = [00000,1,00000]</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        label <span class="op">=</span> torch.zeros(<span class="dv">1</span>, dtype<span class="op">=</span>torch.<span class="bu">long</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        label[<span class="dv">0</span>] <span class="op">=</span> <span class="dv">779</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        loss <span class="op">=</span> nn.CrossEntropyLoss()(out, label)</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        <span class="co"># import pdb ; pdb.set_trace()</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>        <span class="co"># loss = out.norm()</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        loss.backward()</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        avg_grad <span class="op">=</span> np.<span class="bu">abs</span>(image.grad.data.cpu().numpy()).mean()</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        norm_lr <span class="op">=</span> lr <span class="op">/</span> avg_grad</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        image.data <span class="op">+=</span> norm_lr <span class="op">*</span> image.grad.data</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        image.data <span class="op">=</span> clip(image.data)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        image.grad.data.zero_()</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image.cpu().data.numpy()</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deep_dream(image, model, iterations, lr, octave_scale, num_octaves):</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="co">""" Main deep dream method """</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    image <span class="op">=</span> preprocess(image).unsqueeze(<span class="dv">0</span>).cpu().data.numpy()</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract image representations for each octave</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    octaves <span class="op">=</span> [image]</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(num_octaves <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>        octaves.append(nd.zoom(octaves[<span class="op">-</span><span class="dv">1</span>], (<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span> <span class="op">/</span> octave_scale, <span class="dv">1</span> <span class="op">/</span> octave_scale), order<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    detail <span class="op">=</span> np.zeros_like(octaves[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> octave, octave_base <span class="kw">in</span> <span class="bu">enumerate</span>(tqdm(octaves[::<span class="op">-</span><span class="dv">1</span>], desc<span class="op">=</span><span class="st">"Dreaming"</span>)):</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> octave <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Upsample detail to new octave dimension</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>            detail <span class="op">=</span> nd.zoom(detail, np.array(octave_base.shape) <span class="op">/</span> np.array(detail.shape), order<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add deep dream detail from previous octave to new base</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>        input_image <span class="op">=</span> octave_base <span class="op">+</span> detail</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Get new deep dream image</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>        dreamed_image <span class="op">=</span> dream(input_image, model, iterations, lr)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract deep dream details</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>        detail <span class="op">=</span> dreamed_image <span class="op">-</span> octave_base</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> deprocess(dreamed_image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="209">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> torch</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torch <span class="im">import</span> nn</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> torchvision <span class="im">import</span> models</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the model</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>network <span class="op">=</span> models.vgg19(weights<span class="op">=</span>models.VGG19_Weights.DEFAULT)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># layers = list(network.features.children())</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> network <span class="co"># nn.Sequential(*layers[: (27 + 1)])</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> torch.cuda.is_available():</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    model <span class="op">=</span> model.cuda()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># print(network)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract deep dream image</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>dreamed_image <span class="op">=</span> deep_dream(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    img,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    model,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    iterations<span class="op">=</span><span class="dv">30</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    lr<span class="op">=</span><span class="fl">0.03</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    octave_scale<span class="op">=</span><span class="fl">1.4</span>,</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    num_octaves<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"e93095a5175e490bbd40524688f33b3c","version_major":2,"version_minor":0}
+</script>
+</div>
+</div>
+<div class="cell" data-execution_count="210">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>viz(dreamed_image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="post_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>np.array(img).shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="88">
+<pre><code>(512, 512, 3)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="91">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>nd.zoom(np.array(img), (<span class="dv">1</span> <span class="op">/</span> <span class="fl">1.4</span>, <span class="dv">1</span> <span class="op">/</span> <span class="fl">1.4</span>, <span class="dv">1</span>), order<span class="op">=</span><span class="dv">1</span>).shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="91">
+<pre><code>(366, 366, 3)</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="123">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(dreamed_image)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="123">
+<pre><code>10</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="151">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> more_itertools <span class="im">import</span> zip_equal</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prep_img(arr):</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(arr, Image.Image):</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        arr <span class="op">=</span> np.array(arr)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    arr <span class="op">=</span> arr.squeeze()</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> arr.shape[<span class="dv">0</span>] <span class="op">==</span> <span class="dv">3</span>:</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        arr <span class="op">=</span> arr.transpose((<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">0</span>))</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    _H, _W, C <span class="op">=</span> arr.shape</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> C <span class="op">==</span> <span class="dv">3</span>, arr.shape</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> arr.dtype <span class="kw">in</span> [np.float32, np.float64]:</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>        arr <span class="op">=</span> np.clip(a<span class="op">=</span>arr, a_min<span class="op">=</span><span class="dv">0</span>, a_max<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> arr.dtype <span class="kw">in</span> [np.uint8]:</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>        arr <span class="op">=</span> np.clip(a<span class="op">=</span>arr, a_min<span class="op">=</span><span class="dv">0</span>, a_max<span class="op">=</span><span class="dv">255</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(arr.dtype)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> arr</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> viz(<span class="op">*</span>arrs, ncols<span class="op">=</span><span class="dv">1</span>):</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    fig, axs <span class="op">=</span> plt.subplots(nrows<span class="op">=</span><span class="bu">len</span>(arrs), ncols<span class="op">=</span>ncols, figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">20</span>), squeeze<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> arr, ax <span class="kw">in</span> zip_equal(arrs, axs.ravel()):</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>        <span class="co"># import pdb ; pdb.set_trace()</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        ax.imshow(prep_img(arr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell" data-execution_count="152">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>viz(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dreamed_image[0],</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dreamed_image[5],</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># dreamed_image[9],</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    nd.zoom(np.array(img), (<span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>, <span class="dv">1</span> <span class="op">/</span> <span class="dv">3</span>, <span class="dv">1</span>), order<span class="op">=</span><span class="dv">1</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    img,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="post_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
 </div>
 </div>
 
