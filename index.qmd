@@ -1,15 +1,16 @@
 ---
-title: "About"
-image: profile.jpg
-about:
-  template: jolla
-  links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/nearlydaniel
-    - icon: github
-      text: Github
-      href: https://github.com/thedch
----
+title: "Posts"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: false
+  sort-ui: false
+  filter-ui: false
 
-About this blog
+  # https://quarto.org/docs/websites/website-listings.html#customizing-fields
+  # fields: [image, title, description]
+
+page-layout: full
+title-block-banner: true
+---

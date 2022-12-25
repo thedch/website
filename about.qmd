@@ -1,0 +1,21 @@
+---
+# https://quarto.org/docs/websites/website-about.html
+title: "About Daniel"
+image: profile.png
+about:
+  template: solana
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/thedch
+---
+
+I'm a machine learning engineer.
+
+I shipped many safety critical features at Tesla Autopilot, working on FSD.
+
+I helped on the transition team at Twitter.
+
+I like to kite surf and tweet too much.
+
+I enjoy bike shedding over knowledge management systems.
