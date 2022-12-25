@@ -55,4 +55,5 @@ quarto preview . # runs rendering step + launches a local webserver
 ### References
 
 [Awesome Quarto](https://github.com/mcanouil/awesome-quarto)
+
 [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html)

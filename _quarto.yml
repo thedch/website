@@ -1,6 +1,6 @@
 project:
   type: website
-  output-dir: rendered
+  output-dir: docs
 
 website:
   search: false

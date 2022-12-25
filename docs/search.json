@@ -14,8 +14,22 @@
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit est nec dui eleifend, at dictum elit ullamcorper. Aliquam feugiat dictum bibendum. Praesent fermentum laoreet quam, cursus volutpat odio dapibus in. Fusce luctus porttitor vehicula. Donec ac tortor nisi. Donec at lectus tortor. Morbi tempor, nibh non euismod viverra, metus arcu aliquet elit, sed fringilla urna leo vel purus."
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
+    "objectID": "posts/deep-dream/post.html#merriweather",
+    "href": "posts/deep-dream/post.html#merriweather",
+    "title": "Getting Quarto to execute code blocks",
+    "section": "Merriweather",
+    "text": "Merriweather\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit est nec dui eleifend, at dictum elit ullamcorper. Aliquam feugiat dictum bibendum. Praesent fermentum laoreet quam, cursus volutpat odio dapibus in. Fusce luctus porttitor vehicula. Donec ac tortor nisi. Donec at lectus tortor. Morbi tempor, nibh non euismod viverra, metus arcu aliquet elit, sed fringilla urna leo vel purus."
+  },
+  {
+    "objectID": "posts/deep-dream/post.html#code",
+    "href": "posts/deep-dream/post.html#code",
+    "title": "Getting Quarto to execute code blocks",
+    "section": "3 - Code",
+    "text": "3 - Code\nThis is inline code plus a small code chunk.\n\nprint(f'Daniel has {2+2=} apples')\n\nDaniel has 2+2=4 apples"
+  },
+  {
+    "objectID": "posts/welcome/post.html",
+    "href": "posts/welcome/post.html",
     "title": "Welcome To My Blog",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
@@ -33,26 +47,5 @@
     "title": "About Daniel",
     "section": "",
     "text": "I’m a machine learning engineer.\nI shipped many safety critical features at Tesla Autopilot, working on FSD.\nI helped on the transition team at Twitter.\nI like to kite surf and tweet too much.\nI enjoy bike shedding over knowledge management systems."
-  },
-  {
-    "objectID": "posts/welcome/post.html",
-    "href": "posts/welcome/post.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "posts/deep-dream/post.html#merriweather",
-    "href": "posts/deep-dream/post.html#merriweather",
-    "title": "Getting Quarto to execute code blocks",
-    "section": "Merriweather",
-    "text": "Merriweather\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nam suscipit est nec dui eleifend, at dictum elit ullamcorper. Aliquam feugiat dictum bibendum. Praesent fermentum laoreet quam, cursus volutpat odio dapibus in. Fusce luctus porttitor vehicula. Donec ac tortor nisi. Donec at lectus tortor. Morbi tempor, nibh non euismod viverra, metus arcu aliquet elit, sed fringilla urna leo vel purus."
-  },
-  {
-    "objectID": "posts/deep-dream/post.html#code",
-    "href": "posts/deep-dream/post.html#code",
-    "title": "Getting Quarto to execute code blocks",
-    "section": "3 - Code",
-    "text": "3 - Code\nThis is inline code plus a small code chunk.\n\nprint(f'Daniel has {2+2=} apples')\n\nDaniel has 2+2=4 apples"
   }
 ]
