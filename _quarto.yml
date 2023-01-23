@@ -3,6 +3,7 @@ project:
   output-dir: docs
 
 website:
+  favicon: profile.png
   search: false
   title: "Letters to my past self"
   description: "Societal Progress"
