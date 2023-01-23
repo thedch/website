@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/langchain-adventures/post.html",
       "/posts/huggingface-tokenizer/post.html",
       "/posts/my-time-in-dc/post.html",
       "/posts/post-with-code/post.html",
