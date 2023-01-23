@@ -11,6 +11,7 @@ website:
   search: false
   title: "Letters to my past self"
   description: "Societal Progress"
+  twitter-card: true
   navbar:
     right:
       - about.qmd
