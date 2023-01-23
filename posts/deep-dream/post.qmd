@@ -1,6 +1,5 @@
 ---
 title: 'Getting Quarto to execute code blocks'
-date: '2022-10-05'
 description: 'Reviving Deep Dream'
 execute:
   message: false

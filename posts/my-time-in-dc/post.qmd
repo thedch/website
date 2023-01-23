@@ -1,6 +1,5 @@
 ---
 title: 'My time in DC'
-date: '2022-12-24'
 description: 'Visiting the Capitol'
 ---
 
