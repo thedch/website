@@ -1,9 +1,13 @@
 project:
   type: website
+
+  # https://quarto.org/docs/publishing/github-pages.html#render-to-docs
   output-dir: docs
 
 website:
+  # https://quarto.org/docs/websites/website-tools.html#favicon
   favicon: profile.png
+
   search: false
   title: "Letters to my past self"
   description: "Societal Progress"
