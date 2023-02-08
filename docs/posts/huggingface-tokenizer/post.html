@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2023-01-18">
 
 <title>Letters to my past self – post</title>
 <style>
@@ -88,6 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../profile.png" rel="icon" type="image/png">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -180,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The LLM output is impressive, but I was curious what was going on under the hood of the <code>tokenizer(...)</code> line. What’s going on there, and how is the library designed to support all sorts of different encoding styles and parameters?</p>
 <p>I chose to investigate the <code>use_fast=False</code> option, although it looks like <code>fast</code> <a href="https://huggingface.co/transformers/v2.9.1/main_classes/tokenizer.html">currently isn’t even an option for T5 (FLAN) tokenizers</a></p>
 <p>As we’ll see, it mostly delegates to the SentencePiece library, but there’s a few layers of Python that reveals some nice helper functions, and showed me a bit more about how tokenization is handled by HuggingFace.</p>
-<p>When we call <code>tokenizer(...)</code>, it’s really calling <code>tokenizer.__call(...)</code> under the hood – this is a typical Python syntactic sugar.</p>
+<p>When we call <code>tokenizer(...)</code>, it’s really calling <code>tokenizer.__call__(...)</code> under the hood – this is a typical Python syntactic sugar.</p>
 <p>Using Jupyter’s nice <code>??</code> we can inspect the source code and start digging in:</p>
 <p>Here’s the call stack – most of these functions pretty trivially delegate to the next one in the list, with lots of error checking and batching and extra-argument passing.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tokenizer.<span class="fu">__call__</span> <span class="co"># delegates to _call_one...</span></span>

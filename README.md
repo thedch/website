@@ -79,11 +79,12 @@ posts
 
 Each directory name will be used as the [slug](https://developer.mozilla.org/en-US/docs/Glossary/Slug) for the blog post,
 and the `post.qmd` or `post.ipynb` file will be rendered as the post. This also allows any auxiliary files (images etc) to live in
-each post directory (as opposed to having a flat directory structure with a bunch of `ipynb` files side-by-side, which would be a little less clean)
+each post directory (as opposed to having a flat directory structure with a bunch of `ipynb` files side-by-side, which would be messier)
 
-When adding a new post, the Quarto documentation says that you need to add some [yaml "front matter"](https://quarto.org/docs/tools/jupyter-lab.html#yaml-front-matter)
-to the top of each notebook, with metadata like the title, author, date, etc. It turns out you don't actually need to do this, you can just add the title in a Markdown
-cell at the top of each notebook, which I tend to do naturally anyway.
+When adding a new post, the Quarto documentation says that you need to add some
+[yaml "front matter"](https://quarto.org/docs/tools/jupyter-lab.html#yaml-front-matter)
+to the top of each notebook, with metadata like the title, author, date, etc. It turns out you don't actually need to do this, 
+you can just add the title in a Markdown cell at the top of each notebook, which I tend to do naturally anyway.
 
 When writing a new post or tweaking my CSS etc, I run the preview command to see how things look:
 

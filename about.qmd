@@ -14,8 +14,4 @@ I'm a machine learning engineer.
 
 I shipped many safety critical features at Tesla Autopilot, working on FSD.
 
-I helped on the transition team at Twitter.
-
-I like to kite surf and tweet too much.
-
-I enjoy bike shedding over knowledge management systems.
+I enjoy rock climbing and kite surfing.

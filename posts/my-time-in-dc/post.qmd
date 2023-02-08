@@ -1,6 +1,7 @@
 ---
 title: 'My time in DC'
 description: 'Visiting the Capitol'
+date: Dec 24 2022
 ---
 
 I ran out of the huge glass doors of my hotel, expecting a face full of cold air. 

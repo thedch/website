@@ -1,6 +1,7 @@
 ---
 title: 'Getting Quarto to execute code blocks'
 description: 'Reviving Deep Dream'
+date: Dec 20 2022
 execute:
   message: false
   warning: false
