@@ -1,6 +1,6 @@
 ---
 # https://quarto.org/docs/websites/website-about.html
-title: "About Daniel"
+title: "About"
 image: profile.png
 about:
   template: solana
@@ -14,4 +14,8 @@ I'm a machine learning engineer.
 
 I shipped many safety critical features at Tesla Autopilot, working on FSD.
 
-I enjoy rock climbing and kite surfing.
+I spent some time at Twitter, helping with the acquisition.
+
+I am now the Founding Research Scientist at Harvey AI, building the future of knowledge work.
+
+I enjoy rock climbing and drone cinematography.

@@ -11,7 +11,7 @@ Goal: to work on Jupyter Notebooks and easily publish them to the web for others
 
 I am generally uninterested with comments, newsletter subscriptions, analytics, search, etc.
 
-Download Quarto from [their website](https://quarto.org/docs/get-started/). 
+Download Quarto from [their website](https://quarto.org/docs/get-started/).
 Unfortunately, it doesn't seem to be available via brew / pip / conda / etc, possibly due to the emphasis on R?
 We'll be using Quarto with Jupyter Notebooks and GitHub Pages.
 
@@ -83,8 +83,21 @@ each post directory (as opposed to having a flat directory structure with a bunc
 
 When adding a new post, the Quarto documentation says that you need to add some
 [yaml "front matter"](https://quarto.org/docs/tools/jupyter-lab.html#yaml-front-matter)
-to the top of each notebook, with metadata like the title, author, date, etc. It turns out you don't actually need to do this, 
-you can just add the title in a Markdown cell at the top of each notebook, which I tend to do naturally anyway.
+to the top of each notebook, with metadata like the title, author, date, etc.
+
+Example:
+
+```
+---
+title: [title]
+date: [date]
+description: [description]
+---
+```
+
+You can omit this front matter, but a few things get worse without it:
+- The title of the post will just be "post" (or whatever the filename is)
+- The description will just be the first few lines of the post, which usually isn't ideal
 
 When writing a new post or tweaking my CSS etc, I run the preview command to see how things look:
 

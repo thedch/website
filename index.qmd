@@ -1,6 +1,7 @@
 ---
-title: "Posts"
+title: "👋 Welcome to Daniel's Blog"
 listing:
+  id: listing
   contents: posts
   sort: "date desc"
   type: default
@@ -9,8 +10,15 @@ listing:
   filter-ui: false
 
   # https://quarto.org/docs/websites/website-listings.html#customizing-fields
-  # fields: [image, title, description]
+  fields: [title, date, description]
 
-page-layout: full
-title-block-banner: true
+# title-block-banner: true
 ---
+
+Hi, this is Daniel.
+I’m documenting my learnings on this blog, writing what I wish I knew a year ago.
+Other than writing here, I’m the Founding Research Scientist at [harvey.ai](https://harvey.ai).
+
+
+::: {#sample-listings}
+:::

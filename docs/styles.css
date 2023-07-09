@@ -1,1 +1,35 @@
-/* css styles */
+.quarto-post.image-right {
+    flex-direction: column;
+    background-color: #f5f5f5;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+div.quarto-post {
+    gap: 0em;
+}
+
+div.quarto-post .metadata {
+    margin-top: 0em;
+    margin-bottom: 1em;
+}
+
+h3.no-anchor.listing-title {
+    font-size: 22px;
+    font-weight: 550;
+}
+
+h1.title {
+    font-size: 34px;
+    font-weight: 150;
+}
+
+div.cell-output.cell-output-stdout {
+    background-color: #f8f8f8; /* This gives a slight grey background */
+    border-left: 2px solid #FF5722; /* This gives a left border highlight */
+    padding-left: 5px;
+}
+
+pre code {
+    background-color: #f8f8f8; /* Slight grey background */
+}
