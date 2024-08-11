@@ -40,7 +40,7 @@ You want to be building in a niche that's sufficiently differentiated (and ideal
 
 Writing emails and customer support are the obvious "this is a single-step language model" examples. If you have a product that uses 10s/100s of language model calls to build up a complex work product and make decisions, that's harder to replicate.
 
-## Customization + Data Privacy + Technical Savvy
+## Large Market + Repetive Work + Technical Savvy
 
 This last one is pretty simple. You want to be selling into a large industry, that makes a lot of money, that does a lot of work that language models can help with. Preferrably, the indsutry isn't super tech-savvy, because otherwise they'll probably go off and build their own solution, and your life as a vendor will be harder.
 
