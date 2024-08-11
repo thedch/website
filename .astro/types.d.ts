@@ -145,6 +145,20 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"genai-applications/index.md": {
+	id: "genai-applications/index.md";
+  slug: "genai-applications";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"langchain/index.md": {
+	id: "langchain/index.md";
+  slug: "langchain";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 };
 "projects": {
 "project-1/index.md": {
