@@ -9,17 +9,17 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
+  TITLE: "home",
   DESCRIPTION: "A blog about building great products and machine learning challenges.",
 };
 
 export const BLOG: Metadata = {
-  TITLE: "Blog",
+  TITLE: "blog",
   DESCRIPTION: "A collection of articles on topics I care about.",
 };
 
 export const PROJECTS: Metadata = {
-  TITLE: "Projects",
+  TITLE: "projects",
   DESCRIPTION:
     "A collection of my projects with links to repositories and live demos.",
 };
