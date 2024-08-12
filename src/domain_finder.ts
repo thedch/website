@@ -57,10 +57,10 @@ export class DomainFinder {
         if (word && !this.uniqueWords.has(word) && this.wordList) {
           this.uniqueWords.add(word);
           const li = document.createElement('li');
-          // li.textContent = word;
 
           const wordSpan = document.createElement('span');
           wordSpan.textContent = word;
+
 
           const deleteButton = document.createElement('button');
           deleteButton.textContent = 'Delete';
@@ -68,17 +68,33 @@ export class DomainFinder {
           deleteButton.addEventListener('click', () => this.deleteWord(word, li));
 
           const matchingTLD = this.tlds.find(tld => word.endsWith(tld));
+          let buyButton: HTMLButtonElement | null = null;
           if (matchingTLD) {
+            buyButton = document.createElement('button');
+            buyButton.textContent = 'Buy';
+            buyButton.className = 'buy-btn ml-2 px-2 py-1 bg-blue-500 text-white rounded text-xs';
+            buyButton.addEventListener('click', () => this.buyDomain(word, matchingTLD));
+
             wordSpan.textContent += ` (.${matchingTLD})`;
           }
 
           li.appendChild(wordSpan);
           li.appendChild(deleteButton);
+          if (buyButton) {
+            li.appendChild(buyButton);
+          }
           this.wordList.appendChild(li);
         }
       });
 
       this.input.value = '';
+    }
+
+    private buyDomain(word: string, tld: string): void {
+      // Remove the tld from the word:
+      const wordWithoutTLD = word.replace(`${tld}`, '');
+      const url = `https://www.namecheap.com/domains/registration/results/?domain=${wordWithoutTLD}.${tld}`;
+      window.open(url, '_blank');
     }
 
     private deleteWord(word: string, listItem: HTMLLIElement): void {
