@@ -1,7 +1,7 @@
 ---
 title: "GPT-cha"
 description: "Designing Captcha 2.0 in 24 hours"
-date: "03/25/2023"
+date: "2023-03-25"
 ---
 
 ## GPTCHA - Winner of "AI for Good" Hackathon 🎉🏆
