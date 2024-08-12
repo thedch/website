@@ -7,6 +7,9 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
+import { Icon } from 'astro-icon/components'
+
+
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -89,19 +92,20 @@ const projects: CollectionEntry<"projects">[] = (
             About Me + Contact Info
           </h2>
           <article>
-            <p>
+            <!-- <p>
               You can see my resume <a href="/resume.pdf">here (pdf)</a>.
-            </p>
+            </p> -->
             <p>
               If you want to get in touch with me about something or just to say
               hi, reach out on social media or send me an email! I'm always open to
               meeting new people and interesting conversations.
             </p>
           </article>
-          <ul class="not-prose flex flex-wrap gap-2">
+          <ul class="not-prose flex flex-col gap-2">
             {
               SOCIALS.map((SOCIAL) => (
-                <li class="flex gap-x-2 text-nowrap">
+                <li class="flex items-center gap-x-2">
+                  <Icon name={SOCIAL.ICON} class="w-5 h-5" />
                   <Link
                     href={SOCIAL.HREF}
                     external
@@ -109,11 +113,21 @@ const projects: CollectionEntry<"projects">[] = (
                   >
                     {SOCIAL.NAME}
                   </Link>
-                  {"/"}
                 </li>
               ))
             }
-            <li class="line-clamp-1">
+            <li class="flex items-center gap-x-2">
+              <Icon name="mdi:file-document" class="w-5 h-5" />
+              <Link
+                href="/resume.pdf"
+                external
+                aria-label="View resume"
+              >
+                Resume (PDF)
+              </Link>
+            </li>
+            <li class="flex items-center gap-x-2">
+              <Icon name="mdi:email" class="w-5 h-5" />
               <Link
                 href={`mailto:${SITE.EMAIL}`}
                 aria-label={`Email ${SITE.TITLE}`}

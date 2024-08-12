@@ -28,13 +28,16 @@ export const SOCIALS: Socials = [
   {
     NAME: "X (formerly Twitter)",
     HREF: "https://twitter.com/nearlydaniel",
+    ICON: "mdi:twitter",
   },
   {
     NAME: "GitHub",
     HREF: "https://github.com/thedch",
+    ICON: "mdi:github",
   },
   {
     NAME: "LinkedIn",
     HREF: "https://www.linkedin.com/in/thedch",
+    ICON: "mdi:linkedin",
   },
 ];
