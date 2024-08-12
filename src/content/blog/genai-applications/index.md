@@ -16,7 +16,7 @@ Let’s outline several key features that I think were important for Harvey’s 
 1. Incremental value delivery (human in the loop)
 1. Text is the product
 1. Defensible -- chatGPT alone isn't enough, needs some unique vertical integration
-1. High revenue, large market, repetive workflows
+1. High revenue, large market, repetitive workflows
 
 ## Incremental value delivery
 
@@ -40,9 +40,9 @@ You want to be building in a niche that's sufficiently differentiated (and ideal
 
 Writing emails and customer support are the obvious "this is a single-step language model" examples. If you have a product that uses 10s/100s of language model calls to build up a complex work product and make decisions, that's harder to replicate.
 
-## Large Market + Repetive Work + Technical Savvy
+## Large Market + Repetitive Work + Technical Savvy
 
-This last one is pretty simple. You want to be selling into a large industry, that makes a lot of money, that does a lot of work that language models can help with. Preferrably, the indsutry isn't super tech-savvy, because otherwise they'll probably go off and build their own solution, and your life as a vendor will be harder.
+This last one is pretty simple. You want to be selling into a large industry, that makes a lot of money, that does a lot of work that language models can help with. Preferably, the industry isn't super tech-savvy, because otherwise they'll probably go off and build their own solution, and your life as a vendor will be harder.
 
 ***
 

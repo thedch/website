@@ -61,7 +61,6 @@ export class DomainFinder {
           const wordSpan = document.createElement('span');
           wordSpan.textContent = word;
 
-
           const deleteButton = document.createElement('button');
           deleteButton.textContent = 'Delete';
           deleteButton.className = 'delete-btn ml-2 px-2 py-1 bg-red-500 text-white rounded text-xs';

@@ -21,7 +21,7 @@ You got things done, and if you couldn't, you wouldn't have a job for long.
 
 I reported to Andrej Karpathy, and anyone who has worked with him knows he doesn’t hold your hand. He provides incredible guidance and mentorship, but at the end of the day, you need to figure out what to work on and make significant contributions. This experience taught me how to identify what matters, break down big problems, and work with complex systems—skills crucial for building a company like Harvey from the ground up.
 
-To this day, when interviewing people to join the AI team at Harvey, discernment is the number one thing I look for – it’s harder to evaluate than a simple leetcode problem, but it’s an invaluable trait.
+When scaling the AI team at Harvey, discernment is the number one thing I looked for – it’s harder to evaluate than a simple leetcode problem, but it’s an invaluable trait.
 
 ## Data Obsession
 
