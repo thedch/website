@@ -5,6 +5,8 @@ date: "2023-01-23"
 draft: false
 ---
 
+## Introduction
+
 There’s this fun library that I’ve seen on Twitter called [LangChain](https://www.langchain.com/). I wanted to take it for a spin and see if I could build some little fun thing with it – let’s see how it goes!
 
 Let’s start out with some boilerplate HuggingFace code, this is often useful when debugging:
@@ -22,6 +24,8 @@ print(tokenizer.batch_decode(outputs, skip_special_tokens=True))
 # Output:
 # ['1.8 m']
 ```
+
+## Audio -> Text
 
 When chaining together LLMs, one obvious thing that comes to mind is modality-transition – or concretely, transitioning from audio -> text, and maybe even audio -> text -> image -> video (speak a movie into existence!)
 
@@ -59,6 +63,8 @@ from IPython.display import Audio
 camera = CameraStream(constraints={'audio': True, 'video': False})
 recorder = AudioRecorder(stream=camera)
 ```
+
+## LangChain
 
 Now, let’s bring in LangChain. They already have strong support for OpenAI and HuggingFace which is great, but I need a way to use the locally running Whisper model. Thankfully, I can add a new primitive and as long as I define the input_keys, output_keys, and a _call method, LangChain will happily accept it as part of a SequentialChain!
 
