@@ -1,0 +1,55 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Awesome CV LaTeX Template
+%
+% This template has been downloaded from:
+% https://github.com/posquit0/Awesome-CV
+%
+% Author:
+% Claud D. Park <posquit0.bj@gmail.com>
+% http://www.posquit0.com
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+
+\documentclass[11pt, a4paper]{awesome-cv}
+\fontdir[fonts/]
+
+%%% Configure a directory location for sections
+\newcommand*{\sectiondir}{src/}
+
+% Define your custom color if you don't like awesome colors
+\colorlet{awesome}{awesome-darknight}
+
+%%% Needed to divide into several files
+\usepackage{import}
+
+%%% Essentials
+\name{Daniel Hunter}{}
+\mobile{831-531-7336}
+%%% Social
+\linkedin{thedch}
+\email{hello@danielhunter.io}
+\github{thedch}
+
+%%% Make a footer for CV with three arguments(<left>, <center>, <right>)
+\makecvfooter
+  {\today}
+  {Daniel Hunter~~~·~~~Resume}
+  {\thepage}
+
+\begin{document}
+% Make a header for CV with personal data
+\makecvheader
+
+%%% Import contents
+\import{\sectiondir}{experience.tex}
+\vspace{-7mm} % Reduce whitespace
+\import{\sectiondir}{education.tex}
+% \vspace{-7mm} % Reduce whitespace
+% \import{\sectiondir}{extracurricular.tex}
+% \import{\sectiondir}{honors.tex}
+%\import{\sectiondir}{writing.tex}
+%\import{\sectiondir}{committees.tex}
+
+\end{document}

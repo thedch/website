@@ -1,0 +1,100 @@
+\cvsection{Experience}
+
+\begin{cventries}
+
+  \cventry
+  {Head of AI Engineering, Founding Research Scientist}
+  {Harvey AI}
+  {San Francisco, CA}
+  {Feb 2023 - Present}
+  {
+    \begin{cvitems}
+      \item Joined as the first Machine Learning hire, built out numerous from-scratch product lines, and scaled and managed the AI Engineering team
+      \item Developed and shipped the core Assistant AI enterprise product offering for Harvey, which is responsible for \$20M+ ARR.
+      \item Scaled the AI org from zero to 10+ engineers in under a year, working with executives to set engineering culture, and scale processes.
+      \item Developed and iterated on many internal abstractions and prototyping systems which power the day-to-day research
+      and development of the current product lines.
+      \item Worked closely with internal domain experts and external design partners (including onsite visits) to design and
+      improve new product lines.
+    \end{cvitems}
+  }
+
+	\cventry
+	{Machine Learning Scientist \rightarrow \; Senior Machine Learning Scientist}
+	{Tesla Autopilot (Computer Vision Team)}
+	{Palo Alto, CA}
+	{Sept 2019 - Sept 2022}
+	{
+		\begin{cvitems}
+			\item Led a four person dataset management team that handled Autolabeler operation to create datasets.
+			\begin{itemize}
+				\item Designed a dataset management system for easy reproducibility and delivery of new incremental datasets.
+				\item Maintained the ingestion pipeline to take in customer data and run Autolabeler Neural Networks, build new targeted datasets
+        			based off customer issues, and deliver repeated wins to the in-car driving experience.
+				\item Wrote a particularly lightweight Autolabeling system that addressed critical in-car issues in a regulatory context.
+			\end{itemize}
+			\item Trained and shipped a variety of Neural Networks for Full Self Driving. This included dataset and highloss analysis to find issues in
+      			training data, optimizing dataloading code, architecture search, tuning training regime, minimizing quantization error,
+      			designing task appropriate metrics, reducing in-car inference latency, and more. Some of the specific Neural Networks I worked on are listed below:
+			\item Trained and shipped iterations of Emergency Vehicle Detection Neural Network (from scratch bringup)
+			\begin{itemize}
+				\item Worked with data labeling team to grow the dataset in targeted directions, as well as fix specific issues in labeling ontology.
+				\item Extensive architecture search to profile latency performance across backbones and video modules to maximize metrics and minimize inference latency
+			\end{itemize}
+			\item Trained and shipped iterations of the Driver Monitoring Neural Network
+			\begin{itemize}
+				\item Increased accuracy significantly via high loss analysis, architecture search, and training regime tuning.
+				\item Added new Neural Network outputs to address customer issues, such as when the driver was partially out of camera view.
+			\end{itemize}
+			\item Trained and shipped iterations of the Camera Occlusion Neural Network (patent pending, from scratch bringup)
+			\begin{itemize}
+				\item Added new Neural Network outputs to address customer issues, such as specific cases of difficult to detect tire spray occluding the leading vehicle.
+			\end{itemize}
+			\item Trained and shipped iterations of the Pedestrian Semantic Classification Neural Network (from scratch bringup)
+			\begin{itemize}
+				\item Increased accuracy via high loss analysis and extensive architecture and training regime tuning.
+			\end{itemize}
+			\item Wrote an architecture visualization graph tracer to represent the Neural Network visually along with per-layer latency, which is used across the Vision team to optimize inference latency.
+		\end{cvitems}
+	}
+
+	\cventry
+	{Engineer in Deep Learning Research}
+	{DeepScale (acquired by Tesla)}
+	{Mountain View, CA}
+	{June 2018 - Sept 2019}
+	{
+		\begin{cvitems}
+			\item Wrote the internal repository for PyTorch training used for deep learning experiments.
+			\begin{itemize}
+				\item Designed a generic training loop to work with arbitrary dataloaders, architectures, and metrics.
+        % \item Focused on modularity via decoupled components and reproducibility via a config file to define the entire experiment.
+			\end{itemize}
+			\item Used PyTorch to achieve 77\% class IOU on Cityscapes dataset using a DeepLabV3+ style net.
+			\item Owned freespace and lane semantic segmentation Neural Networks
+			\begin{itemize}
+				% \item Task definition based on discussions with business development for customer needs.
+				\item Wrote annotation guide for both tasks, and QA'ed annotated data from Samasource.
+				\item Redesigned the previously mentioned Cityscapes model to use 1/100th - 1/200th of the FLOPS.
+        % \item Identified failure modes, tuned annotation guide and dataset to remove them.
+        % \item Achieved 98\% IOU on Freespace task with 8 gigaflop model.
+        % \item Achieved 78\% mIOU on Lane segmentation task with 8 gigaflop model.
+				\item These two networks (along with an object detector) were displayed at CES 2019 as a flagship demo.
+			\end{itemize}
+			% \item Implemented multi task learning enabling the unification of these two Neural Networks (along with pixel wise depth), with negligible drop in metrics (\textasciitilde 1\%), into a single 8 gigaflop net.
+			% \item Gave multiple company wide presentations on PyTorch, segmentation, and metrics best practices and techniques.
+		\end{cvitems}
+	}
+
+% 	\cventry
+% 	{Platform Intern}
+% 	{UpGuard}
+% 	{Mountain View, CA}
+% 	{Summer 2017}
+% 	{
+% 		\begin{cvitems}
+% 			\item {Worked as a Junior SRE using Kubernetes and Docker to support a front facing cybersecurity application.}
+% 		\end{cvitems}
+% 	}
+
+\end{cventries}
