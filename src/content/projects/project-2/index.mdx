@@ -5,7 +5,7 @@ date: "2024-07-10"
 ---
 
 import Callout from "@/components/Callout.astro";
-import DomainFinder from "@/components/DomainFinder.astro";
+import DomainFinder from "@/components/DomainFinder.tsx";
 
 ---
 
@@ -17,4 +17,4 @@ TODO:
 - [ ] Do some nice stemming to find more domains
 - [ ] Check some synonyms
 
-<DomainFinder />
+<DomainFinder client:load />
