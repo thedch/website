@@ -6,6 +6,7 @@ import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import SignupForm from "@components/SignupForm.astro";
 
 import { Icon } from 'astro-icon/components'
 
@@ -134,6 +135,7 @@ const projects: CollectionEntry<"projects">[] = (
             </li>
           </ul>
         </section>
+        <SignupForm />
       </div>
     </aside>
   </Container>
