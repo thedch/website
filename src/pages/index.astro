@@ -7,6 +7,7 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import SignupForm from "@components/SignupForm.astro";
+import HoverAvatar from "@components/HoverAvatar";
 
 import { Icon } from 'astro-icon/components'
 
@@ -30,7 +31,7 @@ const projects: CollectionEntry<"projects">[] = (
       <div class="space-y-16">
         <section>
           <article>
-            <img src="/avatar.jpeg" class="float-right w-1/4 rounded-full ml-4" />
+            <HoverAvatar client:load />
             <p>
               👋 Hi, I'm Daniel! I'm a machine learning engineer with an emphasis on
               the intersection of research and product.
