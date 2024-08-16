@@ -2,7 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const HoverAvatar: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const avatarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -39,6 +44,7 @@ const HoverAvatar: React.FC = () => {
         width: '25%',
         float: 'right',
         marginLeft: '1rem',
+        marginBottom: isTouchDevice ? '2.5rem' : '1.5rem',
         transition: 'transform 0.1s ease',
         transformStyle: 'preserve-3d',
       }}
@@ -63,16 +69,17 @@ const HoverAvatar: React.FC = () => {
       <div
         style={{
           position: 'absolute',
-          bottom: '-20px',
+          bottom: isTouchDevice ? '-25px' : '-20px',
           left: '50%',
           transform: 'translateX(-50%)',
           fontSize: '12px',
           color: '#666',
           opacity: isHovering ? 0 : 1,
           transition: 'opacity 0.3s ease',
+          whiteSpace: 'nowrap',
         }}
       >
-        hover me!
+        {isTouchDevice ? 'tap me!' : 'hover me!'}
       </div>
     </div>
   );
