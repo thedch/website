@@ -1,7 +1,9 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "daniels-blog"
-# compatibility_date = "2024-10-18"
 pages_build_output_dir = "./dist"
+
+compatibility_flags = [ "nodejs_compat" ]
+compatibility_date = "2024-09-23"
 
 # Automatically place your workloads in an optimal location to minimize latency.
 # If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure
@@ -40,9 +42,9 @@ pages_build_output_dir = "./dist"
 
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#kv-namespaces
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+[[kv_namespaces]]
+binding = "blog"
+id = "316d62d0b2ea4767b6d6ec90e6fc1df1"
 
 # Bind a Queue producer. Use this binding to schedule an arbitrary task that may be processed later by a Queue consumer.
 # Docs: https://developers.cloudflare.com/pages/functions/bindings/#queue-producers
@@ -83,10 +85,3 @@ pages_build_output_dir = "./dist"
 # [[env.production.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "<PRODUCTION_NAMESPACE_ID>"
-
-# [env]
-# compatibility_flags = ["nodejs_compat"]
-
-compatibility_flags = [ "nodejs_compat" ]
-compatibility_date = "2024-09-23"
-
