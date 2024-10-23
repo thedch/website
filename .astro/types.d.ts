@@ -168,13 +168,20 @@ declare module 'astro:content' {
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".mdx"] };
-"project-1/index.md": {
-	id: "project-1/index.md";
-  slug: "project-1";
+"gptcha/index.md": {
+	id: "gptcha/index.md";
+  slug: "gptcha";
   body: string;
   collection: "projects";
   data: InferEntrySchema<"projects">
 } & { render(): Render[".md"] };
+"knowledge-base/index.mdx": {
+	id: "knowledge-base/index.mdx";
+  slug: "knowledge-base";
+  body: string;
+  collection: "projects";
+  data: InferEntrySchema<"projects">
+} & { render(): Render[".mdx"] };
 };
 
 	};
