@@ -1,0 +1,24 @@
+---
+title: "Experimenting with Cloudflare"
+description: "Proof of concept of Cloudflare functionality"
+date: "2024-10-30"
+---
+
+import CloudflareTester from "@/content/projects/cloudflare-fun/CloudflareTester.tsx";
+
+---
+
+Cloudflare has a rich ecosystem, and I've been wanting to try it out a bit.
+Beyond their CDN / DDoS protection, they have a lot of interesting products --
+a KV store, structured database, AI inference systems, and more.
+
+For example, here's a simple global state represented by a 25 length string.
+Each cell can be in one of three states, determined by the value of the character
+at that index.
+
+This is backed by the Cloudflare KV store, and the state is managed by a simple
+React component. You can click on any cell to transition it to the next state,
+and the changes are persisted to the KV store. If you refresh the page, you'll
+see that the state is persisted (or check this website on a different device).
+
+<CloudflareTester client:load />
