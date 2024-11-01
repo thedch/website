@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --host",
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro build && wrangler pages dev",
@@ -25,6 +25,7 @@
     "astro-icon": "^1.1.0",
     "astro-pagefind": "^1.5.0",
     "clsx": "^2.1.1",
+    "onnxruntime-web": "^1.20.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.3.0",

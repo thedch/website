@@ -18,5 +18,15 @@ export default defineConfig({
     }
   },
   output: "server",
-  adapter: cloudflare()
+  adapter: cloudflare(),
+  vite: {
+    build: {
+      modulePreload: {
+        polyfill: false
+      }
+    },
+    optimizeDeps: {
+      exclude: ['onnxruntime-web']
+    }
+  }
 });
