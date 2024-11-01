@@ -1,10 +1,4 @@
 import { useCallback, useState, useRef, useEffect } from 'react';
-import * as ort from 'onnxruntime-web';
-
-ort.env.wasm.wasmPaths = {
-    wasm: '/onnx/ort-wasm-simd-threaded.wasm',
-    mjs: '/onnx/ort-wasm-simd-threaded.jsep.mjs'
-};
 
 interface GridCell {
     value: number;
@@ -128,60 +122,58 @@ function DrawingGrid({ onGridChange, disabled }: DrawingGridProps) {
 
 const MNISTViz: React.FC = () => {
     const [outputValues, setOutputValues] = useState<number[]>([0, 0, 0]);
-    const [session, setSession] = useState<ort.InferenceSession | null>(null);
+    const [session, setSession] = useState<any>(null);
     const [isInferencing, setIsInferencing] = useState(false);
 
     useEffect(() => {
-        // Initialize ONNX Runtime session
         const initSession = async () => {
             try {
-                console.log('WASM Paths:', ort.env.wasm.wasmPaths);
-                console.log('Attempting to create session...');
-                // You might also want to try adding some execution provider options
+                const ortModule = await import('onnxruntime-web');
+
+                ortModule.env.wasm.wasmPaths = {
+                    wasm: '/onnx/ort-wasm-simd-threaded.wasm',
+                };
+
                 const sessionOptions = {
                     executionProviders: ['wasm'],
                     graphOptimizationLevel: 'all' as const
                 };
+
                 const response = await fetch('/models/mnist_model.onnx');
                 const arrayBuffer = await response.arrayBuffer();
                 const modelUint8Array = new Uint8Array(arrayBuffer);
 
-                const session = await ort.InferenceSession.create(
+                const session = await ortModule.InferenceSession.create(
                     modelUint8Array,
                     sessionOptions
                 );
-                console.log('Session created successfully');
                 setSession(session);
             } catch (e) {
                 console.error('Failed to load ONNX model:', e);
-                // Log more details about the error
-                if (e instanceof Error) {
-                    console.error('Error message:', e.message);
-                    console.error('Error stack:', e.stack);
-                }
             }
         };
-        initSession();
+
+        if (typeof window !== 'undefined') {
+            initSession();
+        }
     }, []);
 
     const debouncedInference = useCallback(
         debounce(async (grid: number[][]) => {
             if (!session) return;
             setIsInferencing(true);
-            console.log('Inferencing...');
             try {
-                // Prepare input tensor (1, 1, 28, 28) with normalization
+                const ortModule = await import('onnxruntime-web');
                 const input = new Float32Array(1 * 1 * 28 * 28);
                 const mean = 0.1307;
                 const std = 0.3081;
                 for (let i = 0; i < 28; i++) {
                     for (let j = 0; j < 28; j++) {
-                        // Apply the same normalization as in training
                         input[i * 28 + j] = (grid[i][j] - mean) / std;
                     }
                 }
 
-                const tensor = new ort.Tensor('float32', input, [1, 1, 28, 28]);
+                const tensor = new ortModule.Tensor('float32', input, [1, 1, 28, 28]);
                 const results = await session.run({ input: tensor });
                 const output = results.output.data as Float32Array;
 
@@ -194,9 +186,8 @@ const MNISTViz: React.FC = () => {
                 console.error('Inference failed:', e);
             } finally {
                 setIsInferencing(false);
-                console.log('Inference completed');
             }
-        }, 100),  // Wait 100ms between inference calls
+        }, 100),
         [session]
     );
 
