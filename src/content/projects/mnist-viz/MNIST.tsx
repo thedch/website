@@ -2,8 +2,8 @@ import { useCallback, useState, useRef, useEffect } from 'react';
 import * as ort from 'onnxruntime-web';
 
 ort.env.wasm.wasmPaths = {
-    'ort-wasm-simd-threaded.wasm': '/onnx/ort-wasm-simd-threaded.wasm',
-    'ort-wasm-simd-threaded.jsep.wasm': '/onnx/ort-wasm-simd-threaded.jsep.wasm'
+    wasm: '/onnx/ort-wasm-simd-threaded.wasm',
+    mjs: '/onnx/ort-wasm-simd-threaded.jsep.mjs'
 };
 
 interface GridCell {
@@ -140,10 +140,14 @@ const MNISTViz: React.FC = () => {
                 // You might also want to try adding some execution provider options
                 const sessionOptions = {
                     executionProviders: ['wasm'],
-                    graphOptimizationLevel: 'all'
+                    graphOptimizationLevel: 'all' as const
                 };
+                const response = await fetch('/models/mnist_model.onnx');
+                const arrayBuffer = await response.arrayBuffer();
+                const modelUint8Array = new Uint8Array(arrayBuffer);
+
                 const session = await ort.InferenceSession.create(
-                    '/models/mnist_model.onnx',
+                    modelUint8Array,
                     sessionOptions
                 );
                 console.log('Session created successfully');
