@@ -100,7 +100,7 @@ const DomainFinderComponent: React.FC = () => {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyPress={(e) => e.key === 'Enter' && addWord()}
+        onKeyDown={(e) => e.key === 'Enter' && addWord()}
         placeholder="Enter words for domain ideas..."
         className="w-full p-2 border border-gray-300 rounded"
       />

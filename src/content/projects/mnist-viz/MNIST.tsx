@@ -1,12 +1,6 @@
 import { MLCEngine } from "@mlc-ai/web-llm";
 import { useCallback, useState, useRef, useEffect } from 'react';
 
-declare global {
-    interface Navigator {
-        gpu?: GPU;
-    }
-}
-
 interface GridCell {
     value: number;
 }
@@ -41,28 +35,6 @@ function debounce<T extends (...args: any[]) => any>(
 interface DrawingGridProps {
   onGridChange?: (grid: GridCell[][]) => void;
   disabled?: boolean;
-}
-
-async function checkWebGPU(): Promise<string> {
-    if (!navigator.gpu) {
-        return "WebGPU not supported on this device.";
-    }
-
-    const adapter = await navigator.gpu.requestAdapter();
-    if (!adapter) {
-        return "No compatible GPU adapter found.";
-    }
-
-    const device = await adapter.requestDevice();
-
-    // Convert limits to a plain object with enumerable properties
-    const limits = Object.fromEntries(
-        Object.entries(device.limits).map(([key, value]) => [key, value])
-    );
-
-    console.log(limits, device.limits)
-    // TODO: This doesn't work at all, it's just an empty object, fix this at some point
-    return `Adapter: ${adapter.name}, Device: ${device.name}, Limits: ${JSON.stringify(limits)}`;
 }
 
 
@@ -171,10 +143,6 @@ const MNISTViz: React.FC = () => {
     const [userInput, setUserInput] = useState<string>("What color is the sun?");
 
     useEffect(() => {
-        checkWebGPU().then(status => setWebGPUStatus(status));
-    }, []);
-
-    useEffect(() => {
         const initSession = async () => {
             try {
                 const ortModule = await import('onnxruntime-web');
@@ -257,12 +225,6 @@ const MNISTViz: React.FC = () => {
         };
 
         initEngine();
-
-        return () => {
-            if (engine) {
-                engine.destroy();
-            }
-        };
     }, []);
 
     // Separate the chat logic into its own function
@@ -272,12 +234,12 @@ const MNISTViz: React.FC = () => {
         setIsInferencing(true);
         try {
             const messages = [
-                { role: "system", content: "You are a helpful AI assistant." },
-                { role: "user", content: userInput },
+                { role: "system" as const, content: "You are a helpful AI assistant." },
+                { role: "user" as const, content: userInput },
             ];
 
             const reply = await engine.chat.completions.create({ messages });
-            setModelResponse(reply.choices[0].message.content);
+            setModelResponse(reply.choices[0].message.content ?? '');
             console.log('Usage:', reply.usage);
         } catch (error) {
             console.error('Model chat failed:', error);
