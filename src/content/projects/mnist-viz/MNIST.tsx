@@ -131,7 +131,7 @@ const MNISTViz: React.FC = () => {
                 const ortModule = await import('onnxruntime-web');
 
                 ortModule.env.wasm.wasmPaths = {
-                    wasm: '/onnx/ort-wasm-simd-threaded.wasm',
+                    wasm: 'https://pub-754e944a99104f389ba0e6fc4993795b.r2.dev/ort-wasm-simd-threaded.wasm'
                 };
 
                 const sessionOptions = {
