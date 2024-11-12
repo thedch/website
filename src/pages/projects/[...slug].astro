@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
@@ -10,6 +10,17 @@ import TableOfContents from "@components/TableOfContents.astro";
 
 const projects = await getCollection('projects');
 const project = projects.find((project) => project.slug === Astro.params.slug);
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }));
+}
+type Props = CollectionEntry<"projects">;
 
 if (!project) return Astro.redirect("/404");
 
