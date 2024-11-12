@@ -1,4 +1,11 @@
+import { MLCEngine } from "@mlc-ai/web-llm";
 import { useCallback, useState, useRef, useEffect } from 'react';
+
+declare global {
+    interface Navigator {
+        gpu?: GPU;
+    }
+}
 
 interface GridCell {
     value: number;
@@ -35,6 +42,29 @@ interface DrawingGridProps {
   onGridChange?: (grid: GridCell[][]) => void;
   disabled?: boolean;
 }
+
+async function checkWebGPU(): Promise<string> {
+    if (!navigator.gpu) {
+        return "WebGPU not supported on this device.";
+    }
+
+    const adapter = await navigator.gpu.requestAdapter();
+    if (!adapter) {
+        return "No compatible GPU adapter found.";
+    }
+
+    const device = await adapter.requestDevice();
+
+    // Convert limits to a plain object with enumerable properties
+    const limits = Object.fromEntries(
+        Object.entries(device.limits).map(([key, value]) => [key, value])
+    );
+
+    console.log(limits, device.limits)
+    // TODO: This doesn't work at all, it's just an empty object, fix this at some point
+    return `Adapter: ${adapter.name}, Device: ${device.name}, Limits: ${JSON.stringify(limits)}`;
+}
+
 
 function DrawingGrid({ onGridChange, disabled }: DrawingGridProps) {
     const [grid, setGrid] = useState<GridCell[][]>(() =>
@@ -120,10 +150,29 @@ function DrawingGrid({ onGridChange, disabled }: DrawingGridProps) {
     );
 }
 
+interface ProgressUpdate {
+    progress: number;
+    timeElapsed: number;
+    text: string;
+}
+
 const MNISTViz: React.FC = () => {
     const [outputValues, setOutputValues] = useState<number[]>([0, 0, 0]);
     const [session, setSession] = useState<any>(null);
     const [isInferencing, setIsInferencing] = useState(false);
+
+    const [webGPUStatus, setWebGPUStatus] = useState<string>('WebGPU information loading...');
+
+    const [engine, setEngine] = useState<MLCEngine | null>(null);
+    const [modelResponse, setModelResponse] = useState<string>('');
+    const [isModelLoading, setIsModelLoading] = useState(false);
+    const [initProgress, setInitProgress] = useState<ProgressUpdate | null>(null);
+
+    const [userInput, setUserInput] = useState<string>("What color is the sun?");
+
+    useEffect(() => {
+        checkWebGPU().then(status => setWebGPUStatus(status));
+    }, []);
 
     useEffect(() => {
         const initSession = async () => {
@@ -191,6 +240,74 @@ const MNISTViz: React.FC = () => {
         [session]
     );
 
+    // Initialize the engine
+    useEffect(() => {
+        const initEngine = () => {
+            try {
+                const newEngine = new MLCEngine({
+                    initProgressCallback: (progress: ProgressUpdate) => {
+                        console.log('Init progress:', progress);
+                        setInitProgress(progress);
+                    }
+                });
+                setEngine(newEngine);
+            } catch (error) {
+                console.error('Failed to initialize MLCEngine:', error);
+            }
+        };
+
+        initEngine();
+
+        return () => {
+            if (engine) {
+                engine.destroy();
+            }
+        };
+    }, []);
+
+    // Separate the chat logic into its own function
+    const runInference = useCallback(async () => {
+        if (!engine || isInferencing) return;
+
+        setIsInferencing(true);
+        try {
+            const messages = [
+                { role: "system", content: "You are a helpful AI assistant." },
+                { role: "user", content: userInput },
+            ];
+
+            const reply = await engine.chat.completions.create({ messages });
+            setModelResponse(reply.choices[0].message.content);
+            console.log('Usage:', reply.usage);
+        } catch (error) {
+            console.error('Model chat failed:', error);
+            setModelResponse('Failed to get response from model');
+        } finally {
+            setIsInferencing(false);
+        }
+    }, [engine, userInput, isInferencing]);
+
+    // Run inference when model is loaded
+    useEffect(() => {
+        const loadModelAndChat = async () => {
+            if (!engine) return;
+
+            setIsModelLoading(true);
+            try {
+                const selectedModel = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+                await engine.reload(selectedModel);
+                await runInference();
+            } catch (error) {
+                console.error('Model load failed:', error);
+                setModelResponse('Failed to load model');
+            } finally {
+                setIsModelLoading(false);
+            }
+        };
+
+        loadModelAndChat();
+    }, [engine]); // Only run when engine is initialized
+
     return (
         <div className="flex flex-col items-center gap-4">
             <DrawingGrid
@@ -218,6 +335,48 @@ const MNISTViz: React.FC = () => {
                     ))
                 )}
             </div>
+
+            <h2 className="text-2xl font-bold mb-4">LLM in browser demo</h2>
+            <div className="mt-4 p-4 bg-gray-100 rounded-lg w-full max-w-2xl">
+                <div className="mb-4">
+                    <textarea
+                        value={userInput}
+                        onChange={(e) => setUserInput(e.target.value)}
+                        className="w-full p-2 border rounded"
+                        rows={4}
+                        placeholder="Enter your message here..."
+                        disabled={isModelLoading || isInferencing}
+                    />
+                    <button
+                        onClick={runInference}
+                        disabled={isModelLoading || isInferencing || !engine}
+                        className={`mt-2 px-4 py-2 bg-blue-500 text-white rounded transition-colors ${
+                            isModelLoading || isInferencing || !engine
+                                ? 'opacity-50 cursor-not-allowed'
+                                : 'hover:bg-blue-600'
+                        }`}
+                    >
+                        {isInferencing ? 'Generating...' : 'Generate Response'}
+                    </button>
+                </div>
+
+                <h3 className="font-bold mb-2">Model Response:</h3>
+                {(isModelLoading || isInferencing) ? (
+                    <div className="text-gray-600">
+                        {isModelLoading ? 'Loading model...' : 'Generating response...'}
+                        {initProgress && (
+                            <div className="mt-2">
+                                <div>Progress: {initProgress.progress.toFixed(2)}%</div>
+                                <div>Time Elapsed: {initProgress.timeElapsed.toFixed(1)}s</div>
+                                <div>Status: {initProgress.text}</div>
+                            </div>
+                        )}
+                    </div>
+                ) : (
+                    <div className="whitespace-pre-wrap">{modelResponse}</div>
+                )}
+            </div>
+            {/* <div>Hello! {webGPUStatus}</div> */}
         </div>
     );
 };
