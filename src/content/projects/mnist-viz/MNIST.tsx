@@ -128,6 +128,8 @@ interface ProgressUpdate {
     text: string;
 }
 
+const MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
+
 const MNISTViz: React.FC = () => {
     const [outputValues, setOutputValues] = useState<number[]>([0, 0, 0]);
     const [session, setSession] = useState<any>(null);
@@ -180,11 +182,9 @@ const MNISTViz: React.FC = () => {
             try {
                 const ortModule = await import('onnxruntime-web');
                 const input = new Float32Array(1 * 1 * 28 * 28);
-                const mean = 0.1307;
-                const std = 0.3081;
                 for (let i = 0; i < 28; i++) {
                     for (let j = 0; j < 28; j++) {
-                        input[i * 28 + j] = (grid[i][j] - mean) / std;
+                        input[i * 28 + j] = 1.0 - grid[i][j];
                     }
                 }
 
@@ -213,7 +213,7 @@ const MNISTViz: React.FC = () => {
         const initEngine = async () => {
             try {
                 const engine = await CreateMLCEngine(
-                    "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
+                    MODEL_ID,
                     { initProgressCallback: (progress: ProgressUpdate) => {setInitProgress(progress); } },
                 );
                 setEngine(engine);
@@ -282,7 +282,7 @@ const MNISTViz: React.FC = () => {
                 )}
             </div>
 
-            <h2 className="text-2xl font-bold mb-4">LLM in browser demo</h2>
+            <h2 className="text-2xl font-bold mb-4">LLM in browser demo (Model: {MODEL_ID})</h2>
             <div className="mt-4 p-4 bg-gray-100 rounded-lg w-full max-w-2xl">
                 <div className="mb-4">
                     <textarea
