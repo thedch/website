@@ -1,4 +1,4 @@
-import { MLCEngine } from "@mlc-ai/web-llm";
+import { CreateMLCEngine, MLCEngine } from "@mlc-ai/web-llm";
 import { useCallback, useState, useRef, useEffect } from 'react';
 
 interface GridCell {
@@ -6,7 +6,7 @@ interface GridCell {
 }
 
 const GRID_SIZE = 28;
-const CELL_SIZE = 12; // Changed from 16 to 12
+const CELL_SIZE = 12;
 
 function calculateIntensity(mouseX: number, mouseY: number, cellX: number, cellY: number): number {
     const centerX = cellX * CELL_SIZE + CELL_SIZE / 2;
@@ -133,8 +133,6 @@ const MNISTViz: React.FC = () => {
     const [session, setSession] = useState<any>(null);
     const [isInferencing, setIsInferencing] = useState(false);
 
-    const [webGPUStatus, setWebGPUStatus] = useState<string>('WebGPU information loading...');
-
     const [engine, setEngine] = useState<MLCEngine | null>(null);
     const [modelResponse, setModelResponse] = useState<string>('');
     const [isModelLoading, setIsModelLoading] = useState(false);
@@ -208,27 +206,28 @@ const MNISTViz: React.FC = () => {
         [session]
     );
 
-    // Initialize the engine
-    useEffect(() => {
-        const initEngine = () => {
+    useEffect(() => { // Initialize the engine
+        if (engine) return;
+
+        setIsModelLoading(true);
+        const initEngine = async () => {
             try {
-                const newEngine = new MLCEngine({
-                    initProgressCallback: (progress: ProgressUpdate) => {
-                        console.log('Init progress:', progress);
-                        setInitProgress(progress);
-                    }
-                });
-                setEngine(newEngine);
+                const engine = await CreateMLCEngine(
+                    "Qwen2.5-0.5B-Instruct-q4f16_1-MLC",
+                    { initProgressCallback: (progress: ProgressUpdate) => {setInitProgress(progress); } },
+                );
+                setEngine(engine);
             } catch (error) {
                 console.error('Failed to initialize MLCEngine:', error);
+            } finally {
+                setIsModelLoading(false);
             }
         };
 
         initEngine();
     }, []);
 
-    // Separate the chat logic into its own function
-    const runInference = useCallback(async () => {
+    const runInference = useCallback(async () => { // Run inference
         if (!engine || isInferencing) return;
 
         setIsInferencing(true);
@@ -238,37 +237,22 @@ const MNISTViz: React.FC = () => {
                 { role: "user" as const, content: userInput },
             ];
 
+            const startTime = performance.now();
             const reply = await engine.chat.completions.create({ messages });
-            setModelResponse(reply.choices[0].message.content ?? '');
-            console.log('Usage:', reply.usage);
+            const endTime = performance.now();
+            const timeElapsed = endTime - startTime;
+            const generatedTokens = reply.usage?.completion_tokens || 0;
+            const promptTokens = reply.usage?.prompt_tokens || 0;
+            const msg = `Time: ${timeElapsed.toFixed(1)}ms, Output Tokens: ${generatedTokens}, Prompt Tokens: ${promptTokens}`;
+
+            setModelResponse(reply.choices[0].message.content + '\n\n' + msg);
         } catch (error) {
             console.error('Model chat failed:', error);
             setModelResponse('Failed to get response from model');
         } finally {
             setIsInferencing(false);
         }
-    }, [engine, userInput, isInferencing]);
-
-    // Run inference when model is loaded
-    useEffect(() => {
-        const loadModelAndChat = async () => {
-            if (!engine) return;
-
-            setIsModelLoading(true);
-            try {
-                const selectedModel = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
-                await engine.reload(selectedModel);
-                await runInference();
-            } catch (error) {
-                console.error('Model load failed:', error);
-                setModelResponse('Failed to load model');
-            } finally {
-                setIsModelLoading(false);
-            }
-        };
-
-        loadModelAndChat();
-    }, [engine]); // Only run when engine is initialized
+    }, [engine, userInput]);
 
     return (
         <div className="flex flex-col items-center gap-4">
@@ -322,10 +306,9 @@ const MNISTViz: React.FC = () => {
                     </button>
                 </div>
 
-                <h3 className="font-bold mb-2">Model Response:</h3>
-                {(isModelLoading || isInferencing) ? (
+                {isModelLoading && (
                     <div className="text-gray-600">
-                        {isModelLoading ? 'Loading model...' : 'Generating response...'}
+                        <div>Loading model...</div>
                         {initProgress && (
                             <div className="mt-2">
                                 <div>Progress: {initProgress.progress.toFixed(2)}%</div>
@@ -334,11 +317,19 @@ const MNISTViz: React.FC = () => {
                             </div>
                         )}
                     </div>
-                ) : (
-                    <div className="whitespace-pre-wrap">{modelResponse}</div>
+                )}
+
+                {!isModelLoading && (
+                    <>
+                        {modelResponse && <h3 className="font-bold mb-2">Model Response:</h3>}
+                        {isInferencing ? (
+                            <div className="text-gray-600">Generating response...</div>
+                        ) : (
+                            <div className="whitespace-pre-wrap">{modelResponse}</div>
+                        )}
+                    </>
                 )}
             </div>
-            {/* <div>Hello! {webGPUStatus}</div> */}
         </div>
     );
 };
