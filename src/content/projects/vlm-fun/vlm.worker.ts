@@ -5,11 +5,11 @@ env.allowLocalModels = false;
 console.log('Worker initialized');
 
 class VLMPipeline {
-    static task = 'image-to-text';
+    static task = 'image-to-text' as const;
     static model = 'https://assets.dch.xyz/models/Xenova/vit-gpt2-image-captioning';
     static instance: any = null;
 
-    static async getInstance(progress_callback = null) {
+    static async getInstance(progress_callback?: (progress: any) => void) {
         if (this.instance === null) {
             this.instance = pipeline(this.task, this.model, { progress_callback });
         }
@@ -40,7 +40,7 @@ self.addEventListener('message', async (event) => {
             duration_ms: performance.now() - start,
             output: output[0].generated_text
         });
-    } catch (error) {
+    } catch (error: any) {
         console.error('Worker error:', error);
         self.postMessage({
             status: 'error',
