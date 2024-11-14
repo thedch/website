@@ -23,3 +23,5 @@ pnpm-debug.log*
 .idea/
 
 .wrangler/
+public/models
+public/onnx
