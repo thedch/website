@@ -6,7 +6,8 @@ console.log('Worker initialized');
 
 class VLMPipeline {
     static task = 'image-to-text' as const;
-    static model = 'https://assets.dch.xyz/models/Xenova/vit-gpt2-image-captioning';
+    // static model = 'https://assets.dch.xyz/models/Xenova/vit-gpt2-image-captioning';
+    static model = 'Xenova/vit-gpt2-image-captioning';
     static instance: any = null;
 
     static async getInstance(progress_callback?: (progress: any) => void) {
