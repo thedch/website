@@ -1,6 +1,8 @@
 import { pipeline, env } from '@xenova/transformers';
 
 env.allowLocalModels = false;
+env.backends.onnx.wasm.numThreads = 1; // Disable multithreading for WebGPU
+env.backends.onnx.preferredBackend = 'webgpu';
 
 console.log('Worker initialized');
 

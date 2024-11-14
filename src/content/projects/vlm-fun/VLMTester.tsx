@@ -45,6 +45,13 @@ const VideoVLMComponent = () => {
   return (
     <div>
       <h1>Vision-Language Model Image Processing</h1>
+      <p>
+        Here's an example of the Xenova/vit-gpt2-image-captioning VLM.
+        Unfortunately, it's not very good, but it's small and fast (ish).
+        Runs about ~5s per images on my MacBook,
+        (if you enable WebGPU, it's even slower, suspiciously), but it's an easy
+        demo of local inference. I'll try to compare against local Python MPS soon.
+      </p>
       <input type="file" accept="image/*" onChange={handleFileChange} />
       <h2>Outputs:</h2>
       <pre>{JSON.stringify(outputs, null, 2)}</pre>
