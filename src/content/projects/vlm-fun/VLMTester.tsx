@@ -22,6 +22,9 @@ const VideoVLMComponent = () => {
   const latestDetectionsRef = useRef<Detection[]>([]);
   const sendingRef = useRef(false);
   const isRunningRef = useRef(false);
+  const [avgLatency, setAvgLatency] = useState<number>(0);
+  const latencyTimesRef = useRef<number[]>([]);
+  const MAX_LATENCY_SAMPLES = 5;  // Keep last 5 samples
 
   useEffect(() => {
     // Setup webcam
@@ -52,10 +55,10 @@ const VideoVLMComponent = () => {
     };
   }, []);
 
-  const captureAndDisplay = () => {
+  const captureAndProcess = async () => {
     if (!videoRef.current || !captureCanvasRef.current || !displayCanvasRef.current) {
       if (isRunningRef.current) {
-        requestAnimationFrame(captureAndDisplay);
+        requestAnimationFrame(captureAndProcess);
       }
       return;
     }
@@ -69,7 +72,7 @@ const VideoVLMComponent = () => {
     if (!captureCtx || !displayCtx) {
       console.error('Could not get canvas contexts');
       if (isRunningRef.current) {
-        requestAnimationFrame(captureAndDisplay);
+        requestAnimationFrame(captureAndProcess);
       }
       return;
     }
@@ -113,16 +116,31 @@ const VideoVLMComponent = () => {
         }
 
         try {
+          const apiStartTime = performance.now();
+
           const formData = new FormData();
           formData.append('file', blob, 'webcam.jpg');
 
-          console.log('Sending frame to API');
           const response = await fetch('https://predict.dch.xyz/predict/', {
             method: 'POST',
             body: formData,
           });
 
           const result: APIResponse = await response.json();
+
+          // Calculate latency for this call
+          const latency = performance.now() - apiStartTime;
+
+          // Update rolling average
+          latencyTimesRef.current.push(latency);
+          if (latencyTimesRef.current.length > MAX_LATENCY_SAMPLES) {
+            latencyTimesRef.current.shift();
+          }
+
+          // Calculate and set average
+          const avgLatency = latencyTimesRef.current.reduce((a, b) => a + b, 0) / latencyTimesRef.current.length;
+          setAvgLatency(Math.round(avgLatency));
+
           latestDetectionsRef.current = result.boxes;
           setDetections(result.boxes);
           console.log('Got detections:', result.boxes);
@@ -136,7 +154,7 @@ const VideoVLMComponent = () => {
 
     // Schedule next frame
     if (isRunningRef.current) {
-      requestAnimationFrame(captureAndDisplay);
+      requestAnimationFrame(captureAndProcess);
     }
   };
 
@@ -147,7 +165,7 @@ const VideoVLMComponent = () => {
       console.log('Toggle processing:', newValue);
       if (newValue) {
         console.log('Starting processing loop');
-        requestAnimationFrame(captureAndDisplay);
+        requestAnimationFrame(captureAndProcess);
       }
       return newValue;
     });
@@ -156,10 +174,28 @@ const VideoVLMComponent = () => {
   return (
     <div>
       <h1>YOLO Webcam Detection</h1>
-      <button onClick={toggleProcessing}>
-        {isRunning ? 'Stop' : 'Start'} Processing
-      </button>
-      <div style={{ display: 'flex', gap: '20px' }}>
+      <div className="flex items-center gap-4 mb-5">
+        <button
+          onClick={toggleProcessing}
+          className={`
+            ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}
+            text-white
+            px-5 py-2.5
+            rounded-md
+            font-semibold
+            transition-colors
+            cursor-pointer
+            flex items-center gap-2
+          `}
+        >
+          {isRunning ? '⏹' : '▶️'}
+          <span>{isRunning ? 'Stop' : 'Start'} Processing</span>
+        </button>
+        <div className="flex gap-4 text-sm font-mono">
+          <span>Average API Latency: {avgLatency}ms</span>
+        </div>
+      </div>
+      <div className="flex gap-5">
         <video
           ref={videoRef}
           autoPlay
