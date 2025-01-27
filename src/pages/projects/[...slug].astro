@@ -8,6 +8,9 @@ import BackToPrevious from "@components/BackToPrevious.astro";
 import Link from "@components/Link.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 
+const projects = await getCollection('projects');
+const project = projects.find((project) => project.slug === Astro.params.slug);
+
 export async function getStaticPaths() {
   const projects = (await getCollection("projects"))
     .filter((post) => !post.data.draft)
@@ -19,7 +22,8 @@ export async function getStaticPaths() {
 }
 type Props = CollectionEntry<"projects">;
 
-const project = Astro.props;
+if (!project) return Astro.redirect("/404");
+
 const { Content, headings } = await project.render();
 ---
 
