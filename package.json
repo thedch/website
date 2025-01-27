@@ -23,7 +23,7 @@
     "@fontsource/geist-sans": "^5.0.3",
     "@mlc-ai/web-llm": "^0.2.74",
     "@xenova/transformers": "^2.17.2",
-    "astro": "^4.13.3",
+    "astro": "^4.16.18",
     "astro-icon": "^1.1.0",
     "astro-pagefind": "^1.5.0",
     "clsx": "^2.1.1",
