@@ -4,7 +4,7 @@
 MAIN = resume
 
 # Compiler
-LATEX = xelatex
+LATEX = tectonic
 
 # Output directory
 OUTDIR = out
@@ -16,13 +16,12 @@ all: $(OUTDIR) $(OUTDIR)/$(MAIN).pdf
 $(OUTDIR):
 	mkdir -p $(OUTDIR)
 
-# format all tex files -- Makefile bash won't work here because of the **
+# format all tex files
 format:
-	latexindent -w **/*.tex
+	texlab -w resume.tex src/*.tex
 
 $(OUTDIR)/$(MAIN).pdf: $(MAIN).tex src/*.tex
-	$(LATEX) -output-directory=$(OUTDIR) $(MAIN).tex  # First pass
-	$(LATEX) -output-directory=$(OUTDIR) $(MAIN).tex  # Second pass to resolve references
+	$(LATEX) --outdir $(OUTDIR) $(MAIN).tex
 
 # Clean up auxiliary files
 clean:
