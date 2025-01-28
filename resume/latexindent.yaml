@@ -1,0 +1,4 @@
+defaultIndent: "  "  # 4 spaces
+noAdditionalIndent:
+  verbatim: 1
+  verbatimblock: 1
