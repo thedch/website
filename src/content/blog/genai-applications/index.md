@@ -7,11 +7,11 @@ draft: false
 
 ## Introduction
 
-I’ve talked to a lot of people deploying generative AI in different applications and industries. I think there’s a lot of wrong ways to use generative AI, that maybe aren’t necessarily obvious.
+I've talked to a lot of people deploying generative AI in different applications and industries. I think there's a lot of wrong ways to use generative AI, that maybe aren't necessarily obvious.
 
-When I was between Tesla and Harvey, figuring out what I wanted to do next, I tried to think a lot about the “first principles” (I know, sorry) ideal application of gen AI. What are the attributes that are useful?
+When I was between Tesla and Harvey, figuring out what I wanted to do next, I tried to think a lot about the "first principles" (I know, sorry) ideal application of gen AI. What are the attributes that are useful?
 
-Let’s outline several key features that I think were important for Harvey’s success, and discuss the general underlying principles.
+Let's outline several key features that I think were important for Harvey's success, and discuss the general underlying principles.
 
 1. Incremental value delivery (human in the loop)
 1. Text is the product
@@ -28,9 +28,9 @@ Since Harvey is helping accelerate work that is currently being done (e.g. day t
 
 ## Text is the product
 
-Law firms, and professional services at large, sell text. That’s their product. Their deliverables can be fully expressed inside of the Microsoft Office suite.
+Law firms, and professional services at large, sell text. That's their product. Their deliverables can be fully expressed inside of the Microsoft Office suite.
 
-Language models directly and immediately help them deliver their core product! If you sell gen AI to a plumber, you have to convince them that it’ll help with their client bookings, or their financial record keeping, etc. It will help them reduce their expenses or increase efficiency, but it’s not going to literally fix their customer’s pipes. Being able to sell a product that helps them deliver their product to their customers is great, and very clearly aligned with their goals. The sales and value proposition is very clear, the customer will immediately understand why this is worth paying for, as opposed to seeing you as another cost-center vendor to cut.
+Language models directly and immediately help them deliver their core product! If you sell gen AI to a plumber, you have to convince them that it'll help with their client bookings, or their financial record keeping, etc. It will help them reduce their expenses or increase efficiency, but it's not going to literally fix their customer's pipes. Being able to sell a product that helps them deliver their product to their customers is great, and very clearly aligned with their goals. The sales and value proposition is very clear, the customer will immediately understand why this is worth paying for, as opposed to seeing you as another cost-center vendor to cut.
 
 ## Defensible -- ChatGPT alone isn't enough
 
@@ -38,7 +38,7 @@ One thing I saw a ton (and unfortunately still see a lot) is people building pro
 
 You want to be building in a niche that's sufficiently differentiated (and ideally a bit of a vertical) that an OpenAI update isn't going to wipe out your value proposition. Lawyers are only one example of this, but if your value proposition is quite broad and general, it's going to be hard to defend. Data integrations and specialized UIs and workflows are an obvious start -- but thinking even bigger: what are systems that don't obviously appear to be language-model based, but are?
 
-Writing emails and customer support are the obvious "this is a single-step language model" examples. If you have a product that uses 10s/100s of language model calls to build up a complex work product and make decisions, that's harder to replicate.
+Drafting emails and customer support are the obvious "this is a single-step language model" examples. If you have a product that uses 10s/100s of language model calls to build up a complex work product and make decisions, that's harder to replicate.
 
 ## Large Market + Repetitive Work + Technical Savvy
 

@@ -118,3 +118,38 @@ pre {
 .copy-code:active {
   @apply scale-90 transition-transform;
 }
+
+/* Add footnote styles */
+sup[data-footnote-ref] {
+  @apply inline-flex;
+}
+
+sup[data-footnote-ref] a {
+  @apply size-[18px] rounded-full bg-neutral-200 dark:bg-neutral-800;
+  @apply flex items-center justify-center text-xs font-medium;
+  @apply transition-colors duration-300;
+  @apply no-underline;
+}
+
+sup[data-footnote-ref] a:hover {
+  @apply bg-neutral-300 dark:bg-neutral-700;
+}
+
+/* Hover tooltip */
+sup[data-footnote-ref]:hover::before {
+  content: attr(aria-label);
+  @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2;
+  @apply w-64 text-sm rounded shadow-lg;
+  @apply bg-neutral-100 dark:bg-neutral-800;
+  @apply border border-black/15 dark:border-white/20;
+  @apply text-black/75 dark:text-white/75;
+  @apply z-10;
+}
+
+article .footnotes {
+  @apply text-sm border-t border-black/15 dark:border-white/20 mt-8 pt-4;
+}
+
+article .footnote-backref {
+  @apply no-underline ml-2;
+}
