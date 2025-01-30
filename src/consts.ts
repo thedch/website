@@ -26,9 +26,9 @@ export const PROJECTS: Metadata = {
 
 export const SOCIALS: Socials = [
   {
-    NAME: "X (Twitter)",
+    NAME: "X",
     HREF: "https://x.com/nearlydaniel",
-    ICON: "mdi:twitter",
+    ICON: "mdi:file-excel-box",
   },
   {
     NAME: "GitHub",
