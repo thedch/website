@@ -35,19 +35,6 @@ const HoverAvatar: React.FC = () => {
         }}
         alt="Avatar"
       />
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '-20px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontSize: '12px',
-          color: '#666',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        click me!
-      </div>
     </div>
   );
 };
