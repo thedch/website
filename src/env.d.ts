@@ -2,6 +2,9 @@
 /// <reference types="astro/client" />
 
 type KVNamespace = import("@cloudflare/workers-types").KVNamespace;
+
+// This is configured in:
+// Cloudflare Workers & Pages -> Pages -> Settings -> Bindings
 type ENV = {
   blog: KVNamespace;
 };
