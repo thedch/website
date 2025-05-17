@@ -1,0 +1,17 @@
+.hover-avatar-container {
+  position: relative;
+  width: 25%;
+  float: right;
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.hover-avatar {
+  border-radius: 50%;
+  width: 100%;
+  transition: transform 0.3s ease;
+}
+
+.hover-avatar:hover {
+  transform: rotate(180deg);
+}

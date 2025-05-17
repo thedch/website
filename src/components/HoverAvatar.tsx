@@ -1,41 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
+import './HoverAvatar.css';
 
 const HoverAvatar: React.FC = () => {
-  const [effectIndex, setEffectIndex] = useState(0);
-
-  const effects = [
-    { transform: 'rotate(0deg)' }, // Normal
-    { transform: 'rotate(180deg)' }, // Upside down
-  ];
-
-  const handleClick = () => {
-    const newIndex = (effectIndex + 1) % effects.length;
-    setEffectIndex(newIndex);
-  };
-
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: '25%',
-        float: 'right',
-        marginLeft: '1rem',
-        marginBottom: '1.5rem',
-        cursor: 'pointer',
-      }}
-      onClick={handleClick}
+    <a
+      href="https://x.com/nearlydaniel"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="hover-avatar-container"
     >
       <img
         src="/avatar.webp"
-        style={{
-          borderRadius: '50%',
-          width: '100%',
-          transition: 'transform 0.3s ease',
-          ...effects[effectIndex]
-        }}
+        className="hover-avatar"
         alt="Avatar"
       />
-    </div>
+    </a>
   );
 };
 
