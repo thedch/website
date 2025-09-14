@@ -264,7 +264,7 @@ const EmbeddingVisualization: React.FC = () => {
 
       setLoadingProgress('Loading embedding model...');
       const model = await AutoModel.from_pretrained(model_id, {
-        dtype: 'fp32',
+        dtype: 'q4',
         progress_callback: (data: any) => {
           if (data.status === 'downloading') {
             setLoadingProgress(`Downloading model: ${Math.round(data.progress)}%`);
