@@ -1,6 +1,7 @@
 ---
 import Container from "@components/Container.astro";
 import BackToTop from "@components/BackToTop.astro";
+import AboutPopup from "@components/AboutPopup.astro";
 ---
 
 <footer class="animate">
@@ -13,8 +14,7 @@ import BackToTop from "@components/BackToTop.astro";
     <div class="flex items-center justify-between">
       <div>&copy; {new Date().getFullYear()}</div>
       <div>
-        made with ❤️ using
-        <a href="https://astro.build" class="underline hover:no-underline">astro</a>
+        <AboutPopup />
       </div>
       <div class="flex flex-wrap items-center gap-1.5">
         <button
