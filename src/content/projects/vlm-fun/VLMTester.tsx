@@ -121,6 +121,7 @@ const VideoVLMComponent = () => {
           const formData = new FormData();
           formData.append('file', blob, 'webcam.jpg');
 
+          // TODO: This server is deleted, let's rethink this.
           const response = await fetch('https://predict.dch.xyz/predict/', {
             method: 'POST',
             body: formData,

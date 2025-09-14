@@ -2,7 +2,6 @@ import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-import pagefind from "astro-pagefind";
 import react from '@astrojs/react';
 import icon from "astro-icon";
 import remarkFootnotes from "remark-footnotes";
@@ -11,7 +10,7 @@ import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://dch.xyz",
-  integrations: [tailwind(), sitemap(), mdx(), pagefind(), icon(), react()],
+  integrations: [tailwind(), sitemap(), mdx(), icon(), react()],
   markdown: {
     // 1. Enable syntax highlighting with Shiki
     shikiConfig: {

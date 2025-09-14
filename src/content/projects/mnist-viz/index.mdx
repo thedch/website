@@ -4,6 +4,6 @@ description: "Running a small LLM in the browser"
 date: "2024-10-31"
 ---
 
-import MNISTViz from "@/content/projects/mnist-viz/MNIST.tsx";
+import LazyMNIST from "@/components/LazyMNIST.tsx";
 
-<MNISTViz client:load />
+<LazyMNIST client:only="react" />
