@@ -11,6 +11,9 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   site: "https://dch.xyz",
   integrations: [tailwind(), sitemap(), mdx(), icon(), react()],
+  image: {
+    service: { entrypoint: 'astro/assets/services/noop' }
+  },
   markdown: {
     // 1. Enable syntax highlighting with Shiki
     shikiConfig: {
