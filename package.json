@@ -21,7 +21,9 @@
     "@astrojs/tailwind": "^5.1.0",
     "@fontsource/geist-mono": "^5.0.3",
     "@fontsource/geist-sans": "^5.0.3",
+    "@huggingface/transformers": "^3.7.3",
     "@mlc-ai/web-llm": "^0.2.74",
+    "@types/three": "^0.180.0",
     "@types/uuid": "^10.0.0",
     "astro": "^5.13.7",
     "astro-icon": "^1.1.0",
@@ -32,7 +34,9 @@
     "remark-footnotes": "^4.0.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",
+    "three": "^0.180.0",
     "typescript": "^5.5.4",
+    "umap-js": "^1.4.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

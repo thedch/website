@@ -1,0 +1,30 @@
+---
+title: "3D Embedding Visualizations"
+description: "Interactive 3D visualization of text embeddings using AI and dimensionality reduction"
+date: "2025-01-13"
+---
+
+import LazyEmbeddingViz from "@/components/LazyEmbeddingViz.tsx";
+
+---
+
+Text embeddings are dense vector representations that capture the semantic meaning
+of words and sentences. By mapping similar concepts to nearby points in high-dimensional
+space, they enable machines to understand relationships between different pieces of text.
+
+This interactive visualization uses state-of-the-art transformer models to generate
+embeddings from your text, then applies UMAP (Uniform Manifold Approximation and
+Projection) to reduce the dimensionality down to 3D space while preserving the
+semantic relationships.
+
+**How it works:**
+- 🤖 **AI-powered embeddings**: Uses HuggingFace's `all-MiniLM-L6-v2` transformer model to convert text into 384-dimensional vectors
+- 📐 **Dimensionality reduction**: UMAP algorithm intelligently compresses embeddings to 3D while maintaining semantic clustering
+- 🎮 **Interactive 3D space**: Navigate the embedding space with mouse controls - drag to rotate, scroll to zoom
+- 🔍 **Semantic exploration**: Texts with similar meanings appear closer together in the 3D space
+
+Try adding your own texts to see how different concepts cluster together. You might
+discover interesting semantic relationships that weren't immediately obvious!
+
+<LazyEmbeddingViz client:load />
+
