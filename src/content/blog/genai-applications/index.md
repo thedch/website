@@ -1,6 +1,6 @@
 ---
 title: "Where to apply generative AI (or, why Harvey succeeded*)"
-description: "Ways to correctly and incorrectly apply generative AI."
+description: "Ways to correctly and incorrectly apply generative AI"
 date: "2024-08-15"
 draft: false
 ---

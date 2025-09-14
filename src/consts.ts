@@ -4,7 +4,7 @@ export const SITE: Site = {
   TITLE: "daniel's blog",
   DESCRIPTION: "A blog about building great products and machine learning challenges.",
   EMAIL: "daniel@hunter.sh",
-  NUM_POSTS_ON_HOMEPAGE: 5,
+  NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
 };
 
@@ -28,7 +28,7 @@ export const SOCIALS: Socials = [
   {
     NAME: "X",
     HREF: "https://x.com/nearlydaniel",
-    ICON: "mdi:file-excel-box",
+    ICON: "simple-icons:x",
   },
   {
     NAME: "GitHub",

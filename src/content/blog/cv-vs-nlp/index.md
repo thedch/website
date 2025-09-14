@@ -1,6 +1,6 @@
 ---
 title: "CV vs NLP"
-description: "How to move from Computer Vision to Natural Language Processing."
+description: "How to move from Computer Vision to Natural Language Processing"
 date: "2024-08-01"
 draft: false
 ---

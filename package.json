@@ -22,6 +22,7 @@
     "@fontsource/geist-mono": "^5.0.3",
     "@fontsource/geist-sans": "^5.0.3",
     "@huggingface/transformers": "^3.7.3",
+    "@iconify-json/simple-icons": "^1.2.52",
     "@mlc-ai/web-llm": "^0.2.74",
     "@types/three": "^0.180.0",
     "@types/uuid": "^10.0.0",
