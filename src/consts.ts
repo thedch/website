@@ -28,7 +28,7 @@ export const SOCIALS: Socials = [
   {
     NAME: "X",
     HREF: "https://x.com/nearlydaniel",
-    ICON: "simple-icons:x",
+    ICON: "mdi:file-excel-box",
   },
   {
     NAME: "GitHub",
