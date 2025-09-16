@@ -8,7 +8,8 @@
 
   // Assets configuration for Workers deployment
   "assets": {
-    "directory": "./dist"
+    "directory": "./dist",
+    "binding": "ASSETS"
   },
 
   // Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
