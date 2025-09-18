@@ -20,7 +20,7 @@ I used to evaluate all ideas for correctness.
 Was something provable, analytically and verifiably?
 I wanted to be _Rationalist_, and this was important to me.
 
-However, at the altar of correctness, I noticed myselfmyself sacrificing utility.
+However, at the altar of correctness, I noticed myself sacrificing utility.
 What if there was a mindset that you couldn't prove or verify (or even was obviously incorrect), but if you adopted, magically made your life better?
 Wouldn't you want that?
 
