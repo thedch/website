@@ -1,6 +1,6 @@
 # Welcome!
 
-This is my website, built with [Astro](https://astro.build), using the [Astro Micro](https://github.com/trevortylerlee/astro-micro) theme. I've tried a lot of different themes and frameworks for my website, and this one is the most fun to work with. It offers a nice balance of flexibility and simplicity -- easy to hack around, but sensible defaults.
+This is the codebase for my website, built with [Astro](https://astro.build), using the [Astro Micro](https://github.com/trevortylerlee/astro-micro) theme. I've tried a lot of different themes and frameworks for my website, and Astro is the most fun to work with. It offers a nice balance of flexibility and simplicity -- easy to hack around, but sensible defaults.
 
 This website is hosted using Cloudflare Workers. Each push triggers a new deployment.
 
