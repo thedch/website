@@ -45,7 +45,7 @@
     "@webgpu/types": "^0.1.51",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "rollup-plugin-visualizer": "^5.12.0",
     "wrangler": "^4.35.0"
