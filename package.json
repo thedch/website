@@ -37,7 +37,7 @@
     "three": "^0.181.2",
     "typescript": "^5.5.4",
     "umap-js": "^1.4.0",
-    "uuid": "^11.1.0"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.1.68",
