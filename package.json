@@ -33,7 +33,7 @@
     "react-dom": "^19.2.0",
     "remark-footnotes": "^5.0.0",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^3.4.3",
+    "tailwindcss": "^4.1.17",
     "three": "^0.181.2",
     "typescript": "^5.5.4",
     "umap-js": "^1.4.0",
