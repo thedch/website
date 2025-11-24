@@ -79,5 +79,14 @@ export default defineConfig({
         polyfill: false
       },
     },
+    ssr: {
+      // Externalize heavy client-only dependencies from server bundle
+      external: [
+        'onnxruntime-web',
+        '@huggingface/transformers',
+        'three',
+        'umap-js',
+      ],
+    },
   },
 });
