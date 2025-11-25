@@ -1,6 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-family-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
 
 html {
   overflow-y: auto;
@@ -119,37 +123,87 @@ pre {
   @apply scale-90 transition-transform;
 }
 
-/* Add footnote styles */
+/* Beautiful Footnote Styles */
+
+/* Footnote reference (the superscript number in text) */
 sup[data-footnote-ref] {
-  @apply inline-flex;
+  @apply relative inline-flex;
+  margin: 0 0.1em;
 }
 
 sup[data-footnote-ref] a {
-  @apply size-[18px] rounded-full bg-neutral-200 dark:bg-neutral-800;
-  @apply flex items-center justify-center text-xs font-medium;
-  @apply transition-colors duration-300;
+  @apply size-[18px] rounded-full;
+  @apply bg-neutral-200 dark:bg-neutral-800;
+  @apply flex items-center justify-center;
+  @apply text-xs font-semibold;
+  @apply transition-colors duration-200;
   @apply no-underline;
+  @apply hover:bg-neutral-300 dark:hover:bg-neutral-700;
 }
 
-sup[data-footnote-ref] a:hover {
-  @apply bg-neutral-300 dark:bg-neutral-700;
+/* Rich tooltip container */
+.footnote-tooltip {
+  @apply absolute left-1/2 -translate-x-1/2;
+  @apply w-80 max-w-[calc(100vw-2rem)];
+  @apply opacity-0 invisible;
+  @apply transition-opacity duration-200;
+  @apply pointer-events-none;
+  z-index: 100;
+  bottom: calc(100% + 12px);
 }
 
-/* Hover tooltip */
-sup[data-footnote-ref]:hover::before {
-  content: attr(aria-label);
-  @apply absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2;
-  @apply w-64 text-sm rounded shadow-lg;
+.footnote-tooltip.show {
+  @apply opacity-100 visible;
+}
+
+/* Tooltip content box */
+.footnote-tooltip::before {
+  content: '';
+  @apply absolute left-1/2 -translate-x-1/2 -bottom-2;
+  @apply border-8 border-transparent;
+  @apply border-t-neutral-100 dark:border-t-neutral-800;
+}
+
+.footnote-tooltip .footnote-tooltip-content {
+  @apply rounded-lg shadow-lg;
   @apply bg-neutral-100 dark:bg-neutral-800;
-  @apply border border-black/15 dark:border-white/20;
-  @apply text-black/75 dark:text-white/75;
-  @apply z-10;
+  @apply border border-neutral-300/50 dark:border-neutral-700/50;
+  @apply px-3 py-2;
+  @apply text-sm leading-relaxed;
+  @apply text-black/85 dark:text-white/85;
 }
 
+/* Style content within tooltip */
+.footnote-tooltip .footnote-tooltip-content p {
+  @apply m-0;
+}
+
+.footnote-tooltip .footnote-tooltip-content a {
+  @apply inline underline;
+  @apply bg-transparent;
+  @apply size-auto rounded-none;
+  @apply text-inherit;
+  font-size: inherit;
+}
+
+/* Footnotes section at bottom of article */
 article .footnotes {
-  @apply text-sm border-t border-black/15 dark:border-white/20 mt-8 pt-4;
+  @apply mt-12 pt-6;
+  @apply border-t border-neutral-300 dark:border-neutral-700;
 }
 
-article .footnote-backref {
-  @apply no-underline ml-2;
+article .footnotes ol {
+  @apply space-y-2;
+}
+
+article .footnotes li {
+  /* GFM default styling */
+}
+
+/* Back reference arrow */
+article .data-footnote-backref {
+  @apply ml-1 no-underline;
+  @apply text-black/50 dark:text-white/50;
+  @apply hover:text-black dark:hover:text-white;
+  @apply transition-colors duration-200;
 }
