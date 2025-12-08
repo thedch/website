@@ -22,7 +22,11 @@ Welcome! This document outlines how to work in this project and should be follow
 - Favor existing component patterns before introducing new ones.
 - Keep imports tidy; unused imports should be removed. Never wrap imports in try/catch blocks.
 - Prefer Tailwind utility classes for spacing, color, and typography. If you add new global styles, place them with the existing stylesheets.
-- For content-driven pages, gracefully handle missing optional fields (e.g., draft flags, descriptions) to avoid empty UI elements.
+- For content-driven pages, gracefully handle missing optional fields (e.g., draft flags) to avoid empty UI elements.
+- Descriptions are not displayed in the UI for blog posts or projects to maintain a clean interface.
+
+This codebase has Blog Posts and Projects. The boilerplate code to render this content should be kept in sync, unless
+there is an explicit reason to diverge.
 
 ## Testing & Verification
 

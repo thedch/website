@@ -14,25 +14,17 @@ const post = posts.find((post) => post.slug === slug);
 
 if (!post) return Astro.redirect("/404");
 const { Content, headings } = await post.render();
-const description = post.data.description?.trim();
 ---
 
-<Layout title={post.data.title} description={description}>
+<Layout title={post.data.title}>
   <Container>
     <div class="animate">
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
     </div>
-    <div class="my-10 space-y-3">
+    <div class="my-10">
       <h1 class="animate text-3xl font-semibold text-black dark:text-white">
         {post.data.title}
       </h1>
-      {
-        description && (
-          <p class="animate text-base text-black/70 dark:text-white/70">
-            {description}
-          </p>
-        )
-      }
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
     <article class="animate mt-6">
