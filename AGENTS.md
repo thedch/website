@@ -1,5 +1,3 @@
-# Contributor Guidelines for This Repo
-
 Welcome! This document outlines how to work in this project and should be followed for any change in the repository.
 
 ## Project Overview
