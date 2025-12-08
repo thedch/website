@@ -1,5 +1,5 @@
-import React from 'react';
-import './HoverAvatar.css';
+import React from "react";
+import "./HoverAvatar.css";
 
 const HoverAvatar: React.FC = () => {
   return (
@@ -9,11 +9,7 @@ const HoverAvatar: React.FC = () => {
       rel="noopener noreferrer"
       className="hover-avatar-container"
     >
-      <img
-        src="/avatar.webp"
-        className="hover-avatar"
-        alt="Avatar"
-      />
+      <img src="/avatar.webp" className="hover-avatar" alt="Avatar" />
     </a>
   );
 };

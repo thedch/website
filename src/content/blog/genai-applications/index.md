@@ -44,6 +44,6 @@ Drafting emails and customer support are the obvious "this is a single-step lang
 
 This last one is pretty simple. You want to be selling into a large industry, that makes a lot of money, that does a lot of work that language models can help with. Preferably, the industry isn't super tech-savvy, because otherwise they'll probably go off and build their own solution, and your life as a vendor will be harder.
 
-***
+---
 
-*companies are successful due to the hard work and labor from many people, across many corporate functions (along with a bit of luck). I am hoping to highlight a specific set of attributes that I think are important for success, and discuss the general underlying principles.
+\*companies are successful due to the hard work and labor from many people, across many corporate functions (along with a bit of luck). I am hoping to highlight a specific set of attributes that I think are important for success, and discuss the general underlying principles.

@@ -32,19 +32,23 @@ function buildToc(headings: Heading[]) {
 }
 ---
 
-{toc.length > 0 && (
-  <details
-    open
-    class="animate rounded-lg border border-black/15 dark:border-white/20"
-  >
-    <summary>Table of Contents</summary>
-    <nav class="">
-      <ul class="py-3">
-        {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-      </ul>
-    </nav>
-  </details>
-)}
+{
+  toc.length > 0 && (
+    <details
+      open
+      class="animate rounded-lg border border-black/15 dark:border-white/20"
+    >
+      <summary>Table of Contents</summary>
+      <nav class="">
+        <ul class="py-3">
+          {toc.map((heading) => (
+            <TableOfContentsHeading heading={heading} />
+          ))}
+        </ul>
+      </nav>
+    </details>
+  )
+}
 
 <style>
   @import "tailwindcss" reference;

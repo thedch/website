@@ -8,8 +8,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import HoverAvatar from "@components/HoverAvatar";
 
-import { Icon } from 'astro-icon/components'
-
+import { Icon } from "astro-icon/components";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -32,52 +31,59 @@ const projects: CollectionEntry<"projects">[] = (
           <article>
             <HoverAvatar client:load />
             <p>
-              👋 Hi, I'm Daniel! I'm a machine learning engineer with an emphasis on
-              the intersection of research and product.
+              👋 Hi, I'm Daniel! I'm a machine learning engineer with an
+              emphasis on the intersection of research and product.
             </p>
             <p>
-              I'm currently at xAI, working to advance the best AI systems in the world.
+              I'm currently at xAI, working to advance the best AI systems in
+              the world.
             </p>
             <p>
-              I've spent time in both the Computer Vision and Natural Language Processing domains,
-              most recently as the Head of AI Engineering at Harvey AI. Before that, I did Computer Vision Research
-              at Tesla on the Autopilot team, helping build and ship Full Self Driving.
-              You can see more of my work <a href="https://www.linkedin.com/in/thedch">on LinkedIn</a>.
+              I've spent time in both the Computer Vision and Natural Language
+              Processing domains, most recently as the Head of AI Engineering at
+              Harvey AI. Before that, I did Computer Vision Research at Tesla on
+              the Autopilot team, helping build and ship Full Self Driving. You
+              can see more of my work <a
+                href="https://www.linkedin.com/in/thedch">on LinkedIn</a
+              >.
+            </p>
+            <p>This website exists for three main reasons:</p>
+            <p>
+              1️⃣ Firstly, as a representation of my career and resume. If you
+              came hoping to understand who I am and what I've worked on,
+              welcome! You can find my resume <a href="/resume.pdf">here</a>.
             </p>
             <p>
-              This website exists for three main reasons:
+              2️⃣ Secondly, as a public repository of my writing. I am a strong
+              believer in writing to solidify my thinking and building clarity
+              by formulate ideas onto paper. Doing this in public is an extra
+              forcing function to be rigorous in my thinking, so I try to do it
+              when time permits.
             </p>
             <p>
-              1️⃣ Firstly, as a representation of my career and resume.
-              If you came hoping to understand who I am and what I've worked on, welcome!
-              You can find my resume <a href="/resume.pdf">here</a>.
-            </p>
-            <p>
-              2️⃣ Secondly, as a public repository of my writing. I am a strong believer in
-              writing to solidify my thinking and building clarity by formulate ideas onto paper.
-              Doing this in public is an extra forcing function to be rigorous in my thinking,
-              so I try to do it when time permits.
-            </p>
-            <p>
-              I write primarily about interesting product development and engineering challenges.
-              The psychology of building a great product, the organizational challenges of scaling startups,
-              the latest research in ML, and more. I tend to write in a build-in-public style,
-              so some of my posts are more polished than others. I try to share my learnings as I go,
-              writing what I wish I knew years ago.
+              I write primarily about interesting product development and
+              engineering challenges. The psychology of building a great
+              product, the organizational challenges of scaling startups, the
+              latest research in ML, and more. I tend to write in a
+              build-in-public style, so some of my posts are more polished than
+              others. I try to share my learnings as I go, writing what I wish I
+              knew years ago.
             </p>
             <p>
               3️⃣ Thirdly, as a sandbox to tinker with things I'm interested in.
-              As the cost of software drops to zero, the pipeline of idea → software prototype →
-              ship to the internet is increasingly low friction. If you hold the mental
-              model of a web browser as "a way to let other people easily run the code I write",
-              this makes tinkering lots of fun! More-or-less anything that doesn't require authentication
-              or heavy compute processing can be written as a client-only application, aka a static site.
+              As the cost of software drops to zero, the pipeline of idea →
+              software prototype → ship to the internet is increasingly low
+              friction. If you hold the mental model of a web browser as "a way
+              to let other people easily run the code I write", this makes
+              tinkering lots of fun! More-or-less anything that doesn't require
+              authentication or heavy compute processing can be written as a
+              client-only application, aka a static site.
             </p>
             <p>
-              I'm not a web developer by trade, but I enjoy experimenting.
-              (I've been interested in local-first LLM inference lately for example, and
-              have been playing around with WebGPU to see how well you can run small models in the
-              browser).
+              I'm not a web developer by trade, but I enjoy experimenting. (I've
+              been interested in local-first LLM inference lately for example,
+              and have been playing around with WebGPU to see how well you can
+              run small models in the browser).
             </p>
             <p>
               Welcome to my site! Writings, projects, and contact info below.
@@ -122,21 +128,19 @@ const projects: CollectionEntry<"projects">[] = (
         </section>
 
         <section id="contact-info" class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">
-            Contact Info
-          </h2>
+          <h2 class="font-semibold text-black dark:text-white">Contact Info</h2>
           <article>
             <p>
               If you want to get in touch with me about something or just to say
-              hi, reach out on social media or send me an email. I'm always open to
-              meeting new people and interesting conversations.
+              hi, reach out on social media or send me an email. I'm always open
+              to meeting new people and interesting conversations.
             </p>
           </article>
           <ul class="not-prose flex flex-col gap-2">
             {
               SOCIALS.map((SOCIAL) => (
                 <li class="flex items-center gap-x-2">
-                  <Icon name={SOCIAL.ICON} class="w-5 h-5" />
+                  <Icon name={SOCIAL.ICON} class="h-5 w-5" />
                   <Link
                     href={SOCIAL.HREF}
                     external
@@ -148,17 +152,13 @@ const projects: CollectionEntry<"projects">[] = (
               ))
             }
             <li class="flex items-center gap-x-2">
-              <Icon name="mdi:file-document" class="w-5 h-5" />
-              <Link
-                href="/resume.pdf"
-                external
-                aria-label="View resume"
-              >
+              <Icon name="mdi:file-document" class="h-5 w-5" />
+              <Link href="/resume.pdf" external aria-label="View resume">
                 Resume (PDF)
               </Link>
             </li>
             <li class="flex items-center gap-x-2">
-              <Icon name="mdi:email" class="w-5 h-5" />
+              <Icon name="mdi:email" class="h-5 w-5" />
               <Link
                 href={`mailto:${SITE.EMAIL}`}
                 aria-label={`Email ${SITE.TITLE}`}

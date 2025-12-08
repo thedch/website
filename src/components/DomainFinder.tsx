@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from "react";
 
 const useTLDs = () => {
   const [tlds, setTLDs] = useState<string[]>([]);
@@ -6,14 +6,19 @@ const useTLDs = () => {
   useEffect(() => {
     const loadTLDs = async () => {
       try {
-        const response = await fetch('/tlds.txt');
+        const response = await fetch("/tlds.txt");
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const text = await response.text();
-        setTLDs(text.toLowerCase().split('\n').map(tld => tld.trim()));
+        setTLDs(
+          text
+            .toLowerCase()
+            .split("\n")
+            .map((tld) => tld.trim()),
+        );
       } catch (error) {
-        console.error('Error loading TLDs:', error);
+        console.error("Error loading TLDs:", error);
       }
     };
 
@@ -25,28 +30,28 @@ const useTLDs = () => {
 
 const DomainFinderComponent: React.FC = () => {
   const [uniqueWords, setUniqueWords] = useState<Set<string>>(new Set());
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const tlds = useTLDs();
 
-  const [counterKey, setCounterKey] = useState('');
-  const [counterValue, setCounterValue] = useState('');
+  const [counterKey, setCounterKey] = useState("");
+  const [counterValue, setCounterValue] = useState("");
   const [savedValue, setSavedValue] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const addWord = useCallback(() => {
     const words = inputValue.trim().toLowerCase().split(/\s+/);
-    setUniqueWords(prevWords => {
+    setUniqueWords((prevWords) => {
       const newWords = new Set(prevWords);
-      words.forEach(word => {
+      words.forEach((word) => {
         if (word) newWords.add(word);
       });
       return newWords;
     });
-    setInputValue('');
+    setInputValue("");
   }, [inputValue]);
 
   const deleteWord = useCallback((wordToDelete: string) => {
-    setUniqueWords(prevWords => {
+    setUniqueWords((prevWords) => {
       const newWords = new Set(prevWords);
       newWords.delete(wordToDelete);
       return newWords;
@@ -54,9 +59,9 @@ const DomainFinderComponent: React.FC = () => {
   }, []);
 
   const buyDomain = useCallback((word: string, tld: string) => {
-    const wordWithoutTLD = word.replace(`${tld}`, '');
+    const wordWithoutTLD = word.replace(`${tld}`, "");
     const url = `https://www.namecheap.com/domains/registration/results/?domain=${wordWithoutTLD}.${tld}`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }, []);
 
   const getCounter = useCallback(async () => {
@@ -69,17 +74,17 @@ const DomainFinderComponent: React.FC = () => {
       setSavedValue(data.value);
       setError(null);
     } catch (error) {
-      console.error('Error fetching counter value:', error);
-      setError('Failed to fetch counter value');
+      console.error("Error fetching counter value:", error);
+      setError("Failed to fetch counter value");
     }
   }, [counterKey]);
 
   const setCounter = useCallback(async () => {
     try {
-      const response = await fetch('/kv', {
-        method: 'POST',
+      const response = await fetch("/kv", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ key: counterKey, value: counterValue }),
       });
@@ -89,8 +94,8 @@ const DomainFinderComponent: React.FC = () => {
       await getCounter();
       setError(null);
     } catch (error) {
-      console.error('Error setting counter value:', error);
-      setError('Failed to set counter value');
+      console.error("Error setting counter value:", error);
+      setError("Failed to set counter value");
     }
   }, [counterKey, counterValue, getCounter]);
 
@@ -100,49 +105,50 @@ const DomainFinderComponent: React.FC = () => {
         type="text"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => e.key === 'Enter' && addWord()}
+        onKeyDown={(e) => e.key === "Enter" && addWord()}
         placeholder="Enter words for domain ideas..."
-        className="w-full p-2 border border-gray-300 rounded"
+        className="w-full rounded border border-gray-300 p-2"
       />
       <div className="mt-2 text-sm text-gray-600">
         Loaded {tlds.length} TLDs.
       </div>
       <button
         onClick={addWord}
-        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        className="mt-2 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
       >
         Add Word
       </button>
       <div className="mt-4">
         <h3 className="text-lg font-semibold">Words + TLDs:</h3>
         <ul className="list-disc pl-5">
-          {Array.from(uniqueWords).map(word => {
-            const matchingTLD = tlds.find(tld => word.endsWith(tld));
+          {Array.from(uniqueWords).map((word) => {
+            const matchingTLD = tlds.find((tld) => word.endsWith(tld));
             return (
               <li key={word} className="mb-2 flex items-center justify-between">
                 <span className="mr-auto flex items-center">
-                  <span className="w-2 h-2 bg-black rounded-full mr-2 inline-block"></span>
-                  {word}{matchingTLD && ` (.${matchingTLD})`}
+                  <span className="mr-2 inline-block h-2 w-2 rounded-full bg-black"></span>
+                  {word}
+                  {matchingTLD && ` (.${matchingTLD})`}
                 </span>
-                <div className="flex ml-4">
+                <div className="ml-4 flex">
                   {matchingTLD ? (
                     <button
                       onClick={() => buyDomain(word, matchingTLD)}
-                      className="buy-btn ml-2 px-2 py-1 bg-blue-500 text-white rounded text-xs"
+                      className="buy-btn ml-2 rounded bg-blue-500 px-2 py-1 text-xs text-white"
                     >
                       Buy
                     </button>
                   ) : (
                     <button
                       disabled
-                      className="buy-btn ml-2 px-2 py-1 bg-gray-300 text-gray-500 rounded text-xs cursor-not-allowed"
+                      className="buy-btn ml-2 cursor-not-allowed rounded bg-gray-300 px-2 py-1 text-xs text-gray-500"
                     >
                       No TLD found
                     </button>
                   )}
                   <button
                     onClick={() => deleteWord(word)}
-                    className="delete-btn ml-2 px-2 py-1 bg-red-500 text-white rounded text-xs"
+                    className="delete-btn ml-2 rounded bg-red-500 px-2 py-1 text-xs text-white"
                   >
                     Delete
                   </button>
@@ -154,31 +160,31 @@ const DomainFinderComponent: React.FC = () => {
       </div>
 
       <div className="mt-8 border-t pt-4">
-        <h3 className="text-lg font-semibold mb-4">Dynamic Counter</h3>
-        <div className="flex space-x-2 mb-4">
+        <h3 className="mb-4 text-lg font-semibold">Dynamic Counter</h3>
+        <div className="mb-4 flex space-x-2">
           <input
             type="text"
             value={counterKey}
             onChange={(e) => setCounterKey(e.target.value)}
             placeholder="Enter counter key"
-            className="flex-grow p-2 border border-gray-300 rounded"
+            className="flex-grow rounded border border-gray-300 p-2"
           />
           <input
             type="text"
             value={counterValue}
             onChange={(e) => setCounterValue(e.target.value)}
             placeholder="Enter counter value"
-            className="flex-grow p-2 border border-gray-300 rounded"
+            className="flex-grow rounded border border-gray-300 p-2"
           />
           <button
             onClick={setCounter}
-            className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
           >
             Set
           </button>
           <button
             onClick={getCounter}
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
           >
             Get
           </button>
@@ -188,11 +194,7 @@ const DomainFinderComponent: React.FC = () => {
             Saved value for key "{counterKey}": {savedValue}
           </div>
         )}
-        {error && (
-          <div className="mt-2 text-sm text-red-600">
-            {error}
-          </div>
-        )}
+        {error && <div className="mt-2 text-sm text-red-600">{error}</div>}
       </div>
     </div>
   );

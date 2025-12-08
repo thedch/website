@@ -18,6 +18,7 @@ Projection) to reduce the dimensionality down to 3D space while preserving the
 semantic relationships.
 
 **How it works:**
+
 - 🤖 **AI-powered embeddings**: Uses HuggingFace's `all-MiniLM-L6-v2` transformer model to convert text into 384-dimensional vectors
 - 📐 **Dimensionality reduction**: UMAP algorithm intelligently compresses embeddings to 3D while maintaining semantic clustering
 - 🎮 **Interactive 3D space**: Navigate the embedding space with mouse controls - drag to rotate, scroll to zoom
@@ -27,4 +28,3 @@ Try adding your own texts to see how different concepts cluster together. You mi
 discover interesting semantic relationships that weren't immediately obvious!
 
 <LazyEmbeddingViz client:load />
-

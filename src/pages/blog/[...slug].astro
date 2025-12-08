@@ -50,11 +50,13 @@ const description = post.data.description?.trim();
       <h1 class="animate text-3xl font-semibold text-black dark:text-white">
         {post.data.title}
       </h1>
-      {description && (
-        <p class="animate text-base text-black/70 dark:text-white/70">
-          {description}
-        </p>
-      )}
+      {
+        description && (
+          <p class="animate text-base text-black/70 dark:text-white/70">
+            {description}
+          </p>
+        )
+      }
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
     <article class="animate">
