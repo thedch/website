@@ -1,6 +1,5 @@
 /**
  * Beautiful interactive footnotes with rich hover tooltips
- * Inspired by Dario Amodei's blog
  */
 
 interface FootnoteElements {
