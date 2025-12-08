@@ -69,13 +69,15 @@ const MNISTViz: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center gap-4">
-      <h2 className="mb-4 text-2xl font-bold">Model: {MODEL_ID}</h2>
-      <div className="mt-4 w-full max-w-2xl rounded-lg bg-gray-100 p-4">
+      <h2 className="mb-4 text-2xl font-bold text-black dark:text-white">
+        Model: {MODEL_ID}
+      </h2>
+      <div className="mt-4 w-full max-w-2xl rounded-lg bg-neutral-100 p-4 dark:bg-neutral-900">
         <div className="mb-4">
           <textarea
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            className="w-full rounded border p-2"
+            className="w-full rounded border border-black/15 bg-white p-2 text-black dark:border-white/20 dark:bg-neutral-800 dark:text-white"
             rows={4}
             placeholder="Enter your message here..."
             disabled={isModelLoading || isInferencing}
@@ -94,7 +96,7 @@ const MNISTViz: React.FC = () => {
         </div>
 
         {isModelLoading && (
-          <div className="text-gray-600">
+          <div className="text-black/60 dark:text-white/60">
             <div>Loading model...</div>
             {initProgress && (
               <div className="mt-2">
@@ -109,12 +111,18 @@ const MNISTViz: React.FC = () => {
         {!isModelLoading && (
           <>
             {modelResponse && (
-              <h3 className="mb-2 font-bold">Model Response:</h3>
+              <h3 className="mb-2 font-bold text-black dark:text-white">
+                Model Response:
+              </h3>
             )}
             {isInferencing ? (
-              <div className="text-gray-600">Generating response...</div>
+              <div className="text-black/60 dark:text-white/60">
+                Generating response...
+              </div>
             ) : (
-              <div className="whitespace-pre-wrap">{modelResponse}</div>
+              <div className="whitespace-pre-wrap text-black dark:text-white">
+                {modelResponse}
+              </div>
             )}
           </>
         )}
