@@ -14,7 +14,7 @@ const { heading } = Astro.props;
   </Link>
   {
     heading.subheadings.length > 0 && (
-      <ul class="w-full pl-4 mt-1.5">
+      <ul class="mt-1.5 w-full pl-4">
         {heading.subheadings.map((subheading: Heading) => (
           <Astro.self heading={subheading} />
         ))}

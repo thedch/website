@@ -66,7 +66,7 @@ recorder = AudioRecorder(stream=camera)
 
 ## LangChain
 
-Now, let’s bring in LangChain. They already have strong support for OpenAI and HuggingFace which is great, but I need a way to use the locally running Whisper model. Thankfully, I can add a new primitive and as long as I define the input_keys, output_keys, and a _call method, LangChain will happily accept it as part of a SequentialChain!
+Now, let’s bring in LangChain. They already have strong support for OpenAI and HuggingFace which is great, but I need a way to use the locally running Whisper model. Thankfully, I can add a new primitive and as long as I define the input_keys, output_keys, and a \_call method, LangChain will happily accept it as part of a SequentialChain!
 
 ```python
 from more_itertools import one

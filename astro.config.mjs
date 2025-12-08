@@ -1,19 +1,19 @@
-import { defineConfig } from "astro/config";
-import mdx from "@astrojs/mdx";
-import sitemap from "@astrojs/sitemap";
-import react from '@astrojs/react';
-import icon from "astro-icon";
-import remarkGfm from "remark-gfm";
-import rehypeExternalLinks from "rehype-external-links";
-import { visit } from "unist-util-visit";
 import cloudflare from "@astrojs/cloudflare";
+import mdx from "@astrojs/mdx";
+import react from "@astrojs/react";
+import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
+import rehypeExternalLinks from "rehype-external-links";
+import remarkGfm from "remark-gfm";
+import { visit } from "unist-util-visit";
 
 export default defineConfig({
   site: "https://dch.xyz",
   integrations: [sitemap(), mdx(), icon(), react()],
   image: {
-    service: { entrypoint: 'astro/assets/services/noop' }
+    service: { entrypoint: "astro/assets/services/noop" },
   },
   markdown: {
     // 1. Enable syntax highlighting with Shiki
@@ -53,7 +53,7 @@ export default defineConfig({
               "data-footnote-ref": "",
               "data-footnote-id": node.identifier,
               "data-footnote-text": footnoteText,
-              "class": "footnote-ref",
+              class: "footnote-ref",
             };
           });
 
@@ -63,7 +63,10 @@ export default defineConfig({
     ],
     // 3. Add rehype plugins
     rehypePlugins: [
-      [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+      [
+        rehypeExternalLinks,
+        { target: "_blank", rel: ["noopener", "noreferrer"] },
+      ],
     ],
   },
   output: "server",
@@ -76,7 +79,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     build: {
       modulePreload: {
-        polyfill: false
+        polyfill: false,
       },
     },
   },

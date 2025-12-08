@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 interface Detection {
   class: string;
@@ -24,21 +24,23 @@ const VideoVLMComponent = () => {
   const isRunningRef = useRef(false);
   const [avgLatency, setAvgLatency] = useState<number>(0);
   const latencyTimesRef = useRef<number[]>([]);
-  const MAX_LATENCY_SAMPLES = 5;  // Keep last 5 samples
+  const MAX_LATENCY_SAMPLES = 5; // Keep last 5 samples
 
   useEffect(() => {
     // Setup webcam
     const setupWebcam = async () => {
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+        });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
           // Wait for video to be ready
           videoRef.current.onloadedmetadata = () => {
             videoRef.current?.play();
-            console.log('Video dimensions:', {
+            console.log("Video dimensions:", {
               width: videoRef.current?.videoWidth,
-              height: videoRef.current?.videoHeight
+              height: videoRef.current?.videoHeight,
             });
           };
         }
@@ -51,12 +53,16 @@ const VideoVLMComponent = () => {
     // Cleanup
     return () => {
       const stream = videoRef.current?.srcObject as MediaStream;
-      stream?.getTracks().forEach(track => track.stop());
+      stream?.getTracks().forEach((track) => track.stop());
     };
   }, []);
 
   const captureAndProcess = async () => {
-    if (!videoRef.current || !captureCanvasRef.current || !displayCanvasRef.current) {
+    if (
+      !videoRef.current ||
+      !captureCanvasRef.current ||
+      !displayCanvasRef.current
+    ) {
       if (isRunningRef.current) {
         requestAnimationFrame(captureAndProcess);
       }
@@ -66,11 +72,11 @@ const VideoVLMComponent = () => {
     const video = videoRef.current;
     const captureCanvas = captureCanvasRef.current;
     const displayCanvas = displayCanvasRef.current;
-    const captureCtx = captureCanvas.getContext('2d');
-    const displayCtx = displayCanvas.getContext('2d');
+    const captureCtx = captureCanvas.getContext("2d");
+    const displayCtx = displayCanvas.getContext("2d");
 
     if (!captureCtx || !displayCtx) {
-      console.error('Could not get canvas contexts');
+      console.error("Could not get canvas contexts");
       if (isRunningRef.current) {
         requestAnimationFrame(captureAndProcess);
       }
@@ -84,23 +90,40 @@ const VideoVLMComponent = () => {
     displayCanvas.height = video.videoHeight;
 
     // Draw current video frame to capture canvas
-    captureCtx.drawImage(video, 0, 0, captureCanvas.width, captureCanvas.height);
+    captureCtx.drawImage(
+      video,
+      0,
+      0,
+      captureCanvas.width,
+      captureCanvas.height,
+    );
 
     // Draw current video frame to display canvas
-    displayCtx.drawImage(video, 0, 0, displayCanvas.width, displayCanvas.height);
+    displayCtx.drawImage(
+      video,
+      0,
+      0,
+      displayCanvas.width,
+      displayCanvas.height,
+    );
 
     // Overlay latest detections
-    latestDetectionsRef.current.forEach(det => {
-      displayCtx.strokeStyle = '#00ff00';
+    latestDetectionsRef.current.forEach((det) => {
+      displayCtx.strokeStyle = "#00ff00";
       displayCtx.lineWidth = 2;
-      displayCtx.strokeRect(det.xmin, det.ymin, det.xmax - det.xmin, det.ymax - det.ymin);
+      displayCtx.strokeRect(
+        det.xmin,
+        det.ymin,
+        det.xmax - det.xmin,
+        det.ymax - det.ymin,
+      );
 
-      displayCtx.fillStyle = '#00ff00';
-      displayCtx.font = '16px Arial';
+      displayCtx.fillStyle = "#00ff00";
+      displayCtx.font = "16px Arial";
       displayCtx.fillText(
         `${det.class} (${det.confidence.toFixed(2)})`,
         det.xmin,
-        det.ymin - 5
+        det.ymin - 5,
       );
     });
 
@@ -110,7 +133,7 @@ const VideoVLMComponent = () => {
 
       captureCanvas.toBlob(async (blob) => {
         if (!blob) {
-          console.error('Could not get blob from capture canvas');
+          console.error("Could not get blob from capture canvas");
           sendingRef.current = false;
           return;
         }
@@ -119,11 +142,11 @@ const VideoVLMComponent = () => {
           const apiStartTime = performance.now();
 
           const formData = new FormData();
-          formData.append('file', blob, 'webcam.jpg');
+          formData.append("file", blob, "webcam.jpg");
 
           // TODO: This server is deleted, let's rethink this.
-          const response = await fetch('https://predict.dch.xyz/predict/', {
-            method: 'POST',
+          const response = await fetch("https://predict.dch.xyz/predict/", {
+            method: "POST",
             body: formData,
           });
 
@@ -139,18 +162,20 @@ const VideoVLMComponent = () => {
           }
 
           // Calculate and set average
-          const avgLatency = latencyTimesRef.current.reduce((a, b) => a + b, 0) / latencyTimesRef.current.length;
+          const avgLatency =
+            latencyTimesRef.current.reduce((a, b) => a + b, 0) /
+            latencyTimesRef.current.length;
           setAvgLatency(Math.round(avgLatency));
 
           latestDetectionsRef.current = result.boxes;
           setDetections(result.boxes);
-          console.log('Got detections:', result.boxes);
+          console.log("Got detections:", result.boxes);
         } catch (e) {
           console.error("API request failed:", e);
         } finally {
           sendingRef.current = false;
         }
-      }, 'image/jpeg');
+      }, "image/jpeg");
     }
 
     // Schedule next frame
@@ -160,12 +185,12 @@ const VideoVLMComponent = () => {
   };
 
   const toggleProcessing = () => {
-    setIsRunning(prev => {
+    setIsRunning((prev) => {
       const newValue = !prev;
       isRunningRef.current = newValue;
-      console.log('Toggle processing:', newValue);
+      console.log("Toggle processing:", newValue);
       if (newValue) {
-        console.log('Starting processing loop');
+        console.log("Starting processing loop");
         requestAnimationFrame(captureAndProcess);
       }
       return newValue;
@@ -175,24 +200,24 @@ const VideoVLMComponent = () => {
   return (
     <div>
       <h1>YOLO Webcam Detection</h1>
-      <div className="flex items-center gap-4 mb-5">
+      <div className="mb-5 flex items-center gap-4">
         <button
           onClick={toggleProcessing}
           className={`
-            ${isRunning ? 'bg-red-500 hover:bg-red-600' : 'bg-green-500 hover:bg-green-600'}
-            text-white
-            px-5 py-2.5
+            ${isRunning ? "bg-red-500 hover:bg-red-600" : "bg-green-500 hover:bg-green-600"}
+            flex
+            cursor-pointer items-center
+            gap-2
             rounded-md
-            font-semibold
-            transition-colors
-            cursor-pointer
-            flex items-center gap-2
+            px-5
+            py-2.5
+            font-semibold text-white transition-colors
           `}
         >
-          {isRunning ? '⏹' : '▶️'}
-          <span>{isRunning ? 'Stop' : 'Start'} Processing</span>
+          {isRunning ? "⏹" : "▶️"}
+          <span>{isRunning ? "Stop" : "Start"} Processing</span>
         </button>
-        <div className="flex gap-4 text-sm font-mono">
+        <div className="flex gap-4 font-mono text-sm">
           <span>Average API Latency: {avgLatency}ms</span>
         </div>
       </div>
@@ -201,15 +226,15 @@ const VideoVLMComponent = () => {
           ref={videoRef}
           autoPlay
           playsInline
-          style={{ width: '640px', display: 'none' }}
+          style={{ width: "640px", display: "none" }}
         />
         <canvas
           ref={captureCanvasRef}
-          style={{ display: 'none' }}  // Hide capture canvas
+          style={{ display: "none" }} // Hide capture canvas
         />
         <canvas
           ref={displayCanvasRef}
-          style={{ maxWidth: '100%', border: '1px solid #ccc' }}
+          style={{ maxWidth: "100%", border: "1px solid #ccc" }}
         />
       </div>
       <h2>Detections:</h2>

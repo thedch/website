@@ -9,7 +9,7 @@
   // Assets configuration for Workers deployment
   "assets": {
     "directory": "./dist",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
   },
 
   // Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
@@ -17,9 +17,9 @@
   "kv_namespaces": [
     {
       "binding": "blog",
-      "id": "316d62d0b2ea4767b6d6ec90e6fc1df1"
-    }
-  ]
+      "id": "316d62d0b2ea4767b6d6ec90e6fc1df1",
+    },
+  ],
 
   // Automatically place your workloads in an optimal location to minimize latency.
   // If you are running back-end logic in a Pages Function, running it closer to your back-end infrastructure

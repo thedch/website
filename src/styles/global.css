@@ -2,8 +2,10 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --font-family-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-family-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 html {
@@ -43,7 +45,7 @@ footer {
 }
 
 article {
-  @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+  @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-auto max-w-full;
   @apply prose-headings:font-semibold;
   @apply prose-headings:text-black prose-headings:dark:text-white;
 }
@@ -145,7 +147,7 @@ sup[data-footnote-ref] a {
 .footnote-tooltip {
   @apply absolute left-1/2 -translate-x-1/2;
   @apply w-80 max-w-[calc(100vw-2rem)];
-  @apply opacity-0 invisible;
+  @apply invisible opacity-0;
   @apply transition-opacity duration-200;
   @apply pointer-events-none;
   z-index: 100;
@@ -153,13 +155,13 @@ sup[data-footnote-ref] a {
 }
 
 .footnote-tooltip.show {
-  @apply opacity-100 visible;
+  @apply visible opacity-100;
 }
 
 /* Tooltip content box */
 .footnote-tooltip::before {
-  content: '';
-  @apply absolute left-1/2 -translate-x-1/2 -bottom-2;
+  content: "";
+  @apply absolute -bottom-2 left-1/2 -translate-x-1/2;
   @apply border-8 border-transparent;
   @apply border-t-neutral-100 dark:border-t-neutral-800;
 }
