@@ -2,33 +2,86 @@
 
 ---
 
-<div class="group relative">
-  <a
-    href="https://github.com/thedch/website/blob/master/README.md"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="underline transition-colors duration-200 hover:no-underline"
+<div class="about-popup-container relative">
+  <button
+    class="about-popup-trigger cursor-pointer underline transition-colors duration-200 hover:no-underline"
+    type="button"
   >
     about this website
-  </a>
+  </button>
 
-  <!-- Tooltip -->
+  <!-- Tooltip with padding extension to bridge gap -->
   <div
-    class="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 -translate-x-1/2 transform whitespace-nowrap rounded-lg bg-gray-900 px-3 py-2 text-sm text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 dark:bg-gray-100 dark:text-gray-900"
+    class="about-popup-tooltip pointer-events-none absolute bottom-full left-1/2 z-10 -translate-x-1/2 transform pb-2"
   >
-    <div>
-      Built with <span class="font-medium text-orange-300 dark:text-orange-600"
-        >Astro</span
-      > and
-      <span class="font-medium text-orange-300 dark:text-orange-600"
-        >Cloudflare Workers</span>
-    </div>
-    <div class="mt-1 text-xs opacity-75">Click for more info</div>
-
-    <!-- Tooltip arrow -->
-    <div
-      class="absolute left-1/2 top-full h-0 w-0 -translate-x-1/2 transform border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-900 dark:border-t-gray-100"
+    <a
+      href="https://github.com/thedch/website/blob/master/README.md"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="block rounded-lg bg-gray-900 px-3 py-2 text-sm opacity-0 shadow-lg transition-opacity duration-200 hover:bg-gray-800 dark:bg-gray-100 dark:hover:bg-gray-200"
     >
-    </div>
+      <div class="whitespace-nowrap text-orange-300 dark:text-orange-600">
+        Built with Astro and Cloudflare Workers
+      </div>
+      <div
+        class="mt-1 text-center text-xs text-orange-300 dark:text-orange-600"
+      >
+        Source Code →
+      </div>
+    </a>
   </div>
 </div>
+
+<style>
+  @import "tailwindcss" reference;
+
+  /* Desktop: show on hover of trigger button */
+  @media (hover: hover) {
+    /* Show tooltip when hovering the trigger or tooltip area (including padding gap) */
+    .about-popup-trigger:hover + .about-popup-tooltip,
+    .about-popup-tooltip:hover {
+      pointer-events: auto;
+    }
+
+    .about-popup-trigger:hover + .about-popup-tooltip > a,
+    .about-popup-tooltip:hover > a {
+      @apply opacity-100;
+    }
+  }
+
+  /* Mobile: show on click */
+  @media (hover: none) {
+    .about-popup-container.active .about-popup-tooltip {
+      pointer-events: auto;
+    }
+
+    .about-popup-container.active .about-popup-tooltip > a {
+      @apply opacity-100;
+    }
+  }
+</style>
+
+<script>
+  // Handle mobile tap behavior
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector(".about-popup-container");
+    const trigger = document.querySelector(".about-popup-trigger");
+    const tooltipLink = document.querySelector(".about-popup-tooltip a");
+
+    if (!container || !trigger) return;
+
+    // Toggle tooltip on click of trigger button (for mobile)
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      container.classList.toggle("active");
+    });
+
+    // Close tooltip when clicking outside (but not when clicking the link)
+    document.addEventListener("click", (e) => {
+      if (!container.contains(e.target as Node)) {
+        container.classList.remove("active");
+      }
+    });
+  });
+</script>
