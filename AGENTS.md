@@ -6,7 +6,7 @@ Welcome! This document outlines how to work in this project and should be follow
 - **Content**: Blog posts and other content live in `src/content` using Astro content collections.
 - **UI Components**: Reusable pieces are under `src/components` and `src/layouts`.
 - **Pages**: Route files are in `src/pages`; dynamic routes follow Astro's `[param].astro` convention.
-- **Styling**: Tailwind utilities are preferred. Global styles and typography are configured via `tailwind.config.mjs` and `src/styles`.
+- **Styling**: Tailwind CSS v4 is used via `@tailwindcss/vite` plugin. Configuration is done in `src/styles/global.css` using the `@theme` directive. Tailwind utilities are preferred for styling.
 
 ## Development Workflow
 
@@ -14,6 +14,8 @@ Welcome! This document outlines how to work in this project and should be follow
 - Run the site locally with `npm run dev`.
 - Build for production (and run the main check) with `npm run build`.
 - When applicable, use `npm run preview` to serve the production build locally.
+- Format code with `npm run format` (or `npm run format:check` to check without modifying).
+- Pre-commit hooks are configured via `.pre-commit-config.yaml` to auto-format staged files. Install with `pre-commit install`.
 
 ## Code Conventions
 
