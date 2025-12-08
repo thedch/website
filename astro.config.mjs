@@ -1,5 +1,4 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import react from '@astrojs/react';
@@ -7,10 +6,11 @@ import icon from "astro-icon";
 import remarkFootnotes from "remark-footnotes";
 import { visit } from "unist-util-visit";
 import cloudflare from "@astrojs/cloudflare";
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://dch.xyz",
-  integrations: [tailwind(), sitemap(), mdx(), icon(), react()],
+  integrations: [sitemap(), mdx(), icon(), react()],
   image: {
     service: { entrypoint: 'astro/assets/services/noop' }
   },
@@ -72,6 +72,7 @@ export default defineConfig({
     },
   }),
   vite: {
+    plugins: [tailwindcss()],
     build: {
       modulePreload: {
         polyfill: false
