@@ -52,6 +52,11 @@ export default function UserInfo() {
   const [error, setError] = useState<string | null>(null);
   const [serverData, setServerData] = useState<UserInfoData | null>(null);
   const [clientData, setClientData] = useState<ClientInfo | null>(null);
+  const [clientLocation, setClientLocation] = useState<{
+    timezone?: string;
+    coordinates?: { latitude: string; longitude: string };
+  }>({});
+  const [geoStatus, setGeoStatus] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchUserInfo() {
@@ -61,6 +66,11 @@ export default function UserInfo() {
 
         const data = await response.json();
         setServerData(data);
+
+        const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        if (localTimezone) {
+          setClientLocation((prev) => ({ ...prev, timezone: localTimezone }));
+        }
 
         // Gather client-side info
         const client: ClientInfo = {
@@ -131,6 +141,37 @@ export default function UserInfo() {
     fetchUserInfo();
   }, []);
 
+  const requestGeolocation = () => {
+    if (!navigator.geolocation) {
+      setGeoStatus("Geolocation is not supported in this browser.");
+      return;
+    }
+
+    setGeoStatus("Requesting permission for precise location...");
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const latitude = position.coords.latitude.toFixed(5);
+        const longitude = position.coords.longitude.toFixed(5);
+
+        setClientLocation((prev) => ({
+          ...prev,
+          coordinates: { latitude, longitude },
+        }));
+        setGeoStatus("Location captured from your browser.");
+      },
+      (err) => {
+        if (err.code === 1) {
+          setGeoStatus(
+            "Permission denied. We won't request it again unless you click the button.",
+          );
+        } else {
+          setGeoStatus("Unable to retrieve location.");
+        }
+      },
+    );
+  };
+
   if (loading) {
     return (
       <div className="my-8 flex items-center justify-center py-12">
@@ -154,6 +195,21 @@ export default function UserInfo() {
   }
 
   if (!serverData || !clientData) return null;
+
+  const timezoneDisplay =
+    serverData.location.timezone !== "Unknown"
+      ? serverData.location.timezone
+      : clientLocation.timezone
+        ? `${clientLocation.timezone} (from browser)`
+        : "Unknown";
+
+  const latitudeDisplay = clientLocation.coordinates?.latitude
+    ? `${clientLocation.coordinates.latitude} (from browser)`
+    : serverData.location.coordinates.latitude;
+
+  const longitudeDisplay = clientLocation.coordinates?.longitude
+    ? `${clientLocation.coordinates.longitude} (from browser)`
+    : serverData.location.coordinates.longitude;
 
   return (
     <div className="not-prose my-8 space-y-6">
@@ -179,19 +235,37 @@ export default function UserInfo() {
         <h2 className="text-xl font-semibold text-black dark:text-white">
           Location Information
         </h2>
+        <div className="space-y-2">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            Using Cloudflare headers when available. You can optionally share your browser’s precise location to improve the
+            results.
+          </p>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={requestGeolocation}
+              className="rounded-md bg-black px-3 py-2 text-sm font-medium text-white transition hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+            >
+              Use browser location
+            </button>
+            {geoStatus && (
+              <span className="text-sm text-gray-600 dark:text-gray-400">{geoStatus}</span>
+            )}
+          </div>
+        </div>
         <div className="grid gap-4 md:grid-cols-2">
           <InfoItem label="Country" value={serverData.location.country} />
           <InfoItem label="City" value={serverData.location.city} />
           <InfoItem label="Region" value={serverData.location.region} />
-          <InfoItem label="Timezone" value={serverData.location.timezone} />
+          <InfoItem label="Timezone" value={timezoneDisplay} />
           <InfoItem
             label="Latitude"
-            value={serverData.location.coordinates.latitude}
+            value={latitudeDisplay}
             mono
           />
           <InfoItem
             label="Longitude"
-            value={serverData.location.coordinates.longitude}
+            value={longitudeDisplay}
             mono
           />
         </div>
