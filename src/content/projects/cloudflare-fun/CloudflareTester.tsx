@@ -6,7 +6,7 @@ const CloudflareTester: React.FC = () => {
 
   const fetchGameBoard = useCallback(async () => {
     try {
-      const response = await fetch(`/kv-api?key=game-board`);
+      const response = await fetch(`/api/kv-api?key=game-board`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -26,7 +26,7 @@ const CloudflareTester: React.FC = () => {
       const updatedBoard = newBoard.join("");
 
       try {
-        const response = await fetch("/kv-api", {
+        const response = await fetch("/api/kv-api", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

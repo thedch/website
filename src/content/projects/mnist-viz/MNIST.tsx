@@ -100,7 +100,7 @@ const MNISTViz: React.FC = () => {
             <div>Loading model...</div>
             {initProgress && (
               <div className="mt-2">
-                <div>Progress: {initProgress.progress.toFixed(2)}%</div>
+                <div>Progress: {(initProgress.progress * 100).toFixed(2)}%</div>
                 <div>Time Elapsed: {initProgress.timeElapsed.toFixed(1)}s</div>
                 <div>Status: {initProgress.text}</div>
               </div>

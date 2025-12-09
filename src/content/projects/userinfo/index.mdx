@@ -1,0 +1,30 @@
+---
+title: "User Information Display"
+description: "View all available information about your connection - IP address, location, browser, system details, and more"
+date: "2025-12-08"
+demoURL: "/projects/userinfo"
+---
+
+import UserInfo from "./UserInfo.tsx";
+
+## About This Project
+
+This project displays comprehensive information about your connection and browser environment. It combines server-side data from Cloudflare's edge network with client-side JavaScript to provide detailed insights about:
+
+- **Network Information**: Your IP address, protocol, host, and Cloudflare routing details
+- **Location Data**: Country, city, region, timezone, and geographic coordinates
+- **Browser Details**: Browser name, user agent string, supported languages, and encoding
+- **System Information**: Operating system, device type, and hardware capabilities
+- **Client Environment**: Screen resolution, viewport size, color depth, CPU cores, memory, and more
+
+All information is gathered in real-time and displayed below.
+
+<UserInfo client:only="react" />
+
+## How It Works
+
+This project leverages Astro's server-side rendering on Cloudflare's edge network, which provides access to rich request metadata through HTTP headers. The Cloudflare edge adds special headers containing geographic and network information about each request.
+
+## Privacy Note
+
+All information displayed on this page is already transmitted to websites you visit as part of standard HTTP requests. This project simply makes that information visible to you. No data is stored or transmitted to third parties.
