@@ -7,6 +7,7 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import HomeContent from "@content/home.mdx";
+import AsciiBuddy from "@components/AsciiBuddy";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -23,10 +24,13 @@ const projects = (await getCollection("projects"))
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-16">
-        <section>
+        <section class="grid gap-6 lg:grid-cols-[1.6fr,1fr] items-start">
           <article>
             <HomeContent />
           </article>
+          <div class="not-prose">
+            <AsciiBuddy client:load />
+          </div>
         </section>
 
         <section class="animate space-y-6">
