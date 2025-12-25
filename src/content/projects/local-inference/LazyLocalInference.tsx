@@ -1,15 +1,15 @@
 import { lazy, Suspense } from "react";
 
-const MNISTViz = lazy(() => import("@/content/projects/mnist-viz/MNIST.tsx"));
+const LocalInference = lazy(
+  () => import("@content/projects/local-inference/LocalInference"),
+);
 
-const LazyMNIST: React.FC = () => {
+export default function LazyLocalInference() {
   return (
     <Suspense
       fallback={<div className="p-8 text-center">Loading LLM interface...</div>}
     >
-      <MNISTViz />
+      <LocalInference />
     </Suspense>
   );
-};
-
-export default LazyMNIST;
+}

@@ -9,7 +9,7 @@ interface ProgressUpdate {
 
 const MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
 
-const MNISTViz: React.FC = () => {
+export default function LocalInference() {
   const [isInferencing, setIsInferencing] = useState(false);
   const [engine, setEngine] = useState<MLCEngine | null>(null);
   const [modelResponse, setModelResponse] = useState<string>("");
@@ -129,6 +129,4 @@ const MNISTViz: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default MNISTViz;
+}
