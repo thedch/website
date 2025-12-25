@@ -2,7 +2,6 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { AsciiEffect } from "three/examples/jsm/effects/AsciiEffect.js";
-import { SimplexNoise } from "three/examples/jsm/math/SimplexNoise.js";
 
 type Vec2 = { x: number; y: number };
 
@@ -97,50 +96,153 @@ function AsciiRenderer({
   return null;
 }
 
-function HeadBlob({
-  pointer,
+function FloatingOrb({
+  index,
+  initialPosition,
   reducedMotion,
 }: {
-  pointer: React.MutableRefObject<Vec2>;
+  index: number;
+  initialPosition?: THREE.Vector3;
   reducedMotion: boolean;
 }) {
   const meshRef = useRef<THREE.Mesh>(null!);
+  const velocity = useRef<THREE.Vector3>(
+    new THREE.Vector3(
+      (Math.random() - 0.5) * 0.02,
+      (Math.random() - 0.5) * 0.02,
+      (Math.random() - 0.5) * 0.02,
+    ),
+  );
+  const position = useRef<THREE.Vector3>(
+    initialPosition ||
+      new THREE.Vector3(
+        (Math.random() - 0.5) * 3,
+        (Math.random() - 0.5) * 2,
+        (Math.random() - 0.5) * 2,
+      ),
+  );
+
+  // Random size for variety - wider range with some really big orbs
+  const size = useMemo(() => {
+    // Use a distribution that favors smaller sizes but allows for really big ones
+    const rand = Math.random();
+    if (rand < 0.7) {
+      // 70% chance: small to medium (0.1 to 0.3)
+      return 0.1 + Math.random() * 0.2;
+    } else if (rand < 0.9) {
+      // 20% chance: medium to large (0.3 to 0.6)
+      return 0.3 + Math.random() * 0.3;
+    } else {
+      // 10% chance: really big (0.6 to 1.0)
+      return 0.6 + Math.random() * 0.4;
+    }
+  }, []);
+
+  useFrame((state, dt) => {
+    if (!meshRef.current) return;
+
+    const t = state.clock.elapsedTime;
+
+    // Add some floating motion
+    if (!reducedMotion) {
+      velocity.current.y += Math.sin(t * 0.5 + index) * 0.0001;
+      velocity.current.x += Math.cos(t * 0.3 + index) * 0.0001;
+      velocity.current.z += Math.sin(t * 0.4 + index * 0.5) * 0.0001;
+    }
+
+    // Apply velocity with damping
+    velocity.current.multiplyScalar(0.98);
+    position.current.add(velocity.current);
+
+    // Boundary constraints (soft walls)
+    const bounds = 2.5;
+    if (Math.abs(position.current.x) > bounds) {
+      velocity.current.x *= -0.5;
+      position.current.x = Math.sign(position.current.x) * bounds;
+    }
+    if (Math.abs(position.current.y) > bounds) {
+      velocity.current.y *= -0.5;
+      position.current.y = Math.sign(position.current.y) * bounds;
+    }
+    if (Math.abs(position.current.z) > bounds) {
+      velocity.current.z *= -0.5;
+      position.current.z = Math.sign(position.current.z) * bounds;
+    }
+
+    // Update mesh position
+    meshRef.current.position.copy(position.current);
+
+    // Subtle rotation
+    if (!reducedMotion) {
+      meshRef.current.rotation.x += dt * 0.5;
+      meshRef.current.rotation.y += dt * 0.3;
+    }
+  });
+
+  return (
+    <mesh ref={meshRef}>
+      <sphereGeometry args={[size, 16, 16]} />
+      <meshStandardMaterial
+        color={"#ffffff"}
+        roughness={0.35}
+        metalness={0.05}
+      />
+    </mesh>
+  );
+}
+
+type OrbData = {
+  id: number;
+  initialPosition?: THREE.Vector3;
+};
+
+function FloatingOrbs({
+  pointer,
+  createOrbAt,
+  reducedMotion,
+}: {
+  pointer: React.MutableRefObject<Vec2>;
+  createOrbAt: React.MutableRefObject<
+    ((normalizedX: number, normalizedY: number) => void) | null
+  >;
+  reducedMotion: boolean;
+}) {
   const keyLightRef = useRef<THREE.DirectionalLight>(null!);
   const fillLightRef = useRef<THREE.DirectionalLight>(null!);
 
-  // smoothed pointer so it feels “alive”
-  const smooth = useRef<Vec2>({ x: 0, y: 0 });
-
-  const noise = new SimplexNoise();
-  const basePositions = useRef<Float32Array>();
-
-  useEffect(() => {
-    const geo = meshRef.current.geometry as THREE.BufferGeometry;
-    basePositions.current =
-      geo.attributes.position.array.slice() as Float32Array;
-  }, []);
-
-  useFrame(({ clock }) => {
-    const geo = meshRef.current.geometry as THREE.BufferGeometry;
-    const pos = geo.attributes.position;
-    const t = clock.elapsedTime;
-
-    for (let i = 0; i < pos.count; i++) {
-      const ix = i * 3;
-      const x = basePositions.current![ix];
-      const y = basePositions.current![ix + 1];
-      const z = basePositions.current![ix + 2];
-
-      const n = noise.noise3d(x * 0.8, y * 0.8, z * 0.8 + t * 0.6) * 0.03;
-
-      pos.array[ix] = x + x * n;
-      pos.array[ix + 1] = y + y * n;
-      pos.array[ix + 2] = z + z * n;
-    }
-
-    pos.needsUpdate = true;
-    geo.computeVertexNormals();
+  // Initial random number of orbs between 3-6
+  const [orbs, setOrbs] = useState<OrbData[]>(() => {
+    const count = 3 + Math.floor(Math.random() * 4);
+    return Array.from({ length: count }, (_, i) => ({ id: i }));
   });
+
+  const smooth = useRef<Vec2>({ x: 0, y: 0 });
+  const nextOrbId = useRef(100); // Start high to avoid conflicts with initial orbs
+
+  // Expose function to create new orb at click position
+  useEffect(() => {
+    const handleClick = (normalizedX: number, normalizedY: number) => {
+      // Simple 2D plane mapping - map normalized coordinates directly to world space
+      // The scene is viewed from z=3.4, so we place orbs on a plane at z=0
+      const worldPos = new THREE.Vector3(
+        normalizedX * 2.5, // Scale to match scene bounds
+        -normalizedY * 2.5, // Invert Y and scale
+        0, // Place on the z=0 plane
+      );
+
+      setOrbs((prev) => {
+        const maxOrbs = 15;
+        const newOrbs = [
+          ...prev,
+          { id: nextOrbId.current++, initialPosition: worldPos },
+        ];
+        // Remove oldest orb if we exceed the limit
+        return newOrbs.length > maxOrbs ? newOrbs.slice(1) : newOrbs;
+      });
+    };
+
+    createOrbAt.current = handleClick;
+  }, [createOrbAt]);
 
   useFrame((state, dt) => {
     const t = state.clock.elapsedTime;
@@ -152,26 +254,17 @@ function HeadBlob({
     const mx = smooth.current.x;
     const my = smooth.current.y;
 
-    // Idle motion
-    const breath = reducedMotion ? 1 : 1 + 0.04 * Math.sin(t * 0.9);
-    const floatY = reducedMotion ? 0 : 0.15 * Math.sin(t * 0.65);
-    const roll = reducedMotion ? 0 : 0.08 * Math.sin(t * 0.5);
-
-    // Cursor adds “attention”
-    const yaw = mx * 0.6;
-    const pitch = -my * 0.35;
-
-    meshRef.current.position.y = floatY;
-    meshRef.current.rotation.y =
-      yaw + (reducedMotion ? 0 : 0.25 * Math.sin(t * 0.25));
-    meshRef.current.rotation.x =
-      pitch + (reducedMotion ? 0 : 0.08 * Math.sin(t * 0.35));
-    meshRef.current.rotation.z = roll;
-    meshRef.current.scale.setScalar(breath);
-
-    // Lighting steers with cursor to create shifting ASCII shading
-    keyLightRef.current.position.set(2.5 + mx * 2.0, 2.0 + my * 1.5, 3.5);
-    fillLightRef.current.position.set(-2.5 - mx * 1.0, -1.0 - my * 0.8, 3.0);
+    // Lighting steers dramatically with cursor to create shifting ASCII shading
+    keyLightRef.current.position.set(
+      2.5 + mx * 6.0,
+      2.0 + my * 5.0,
+      3.5 + mx * 2.0,
+    );
+    fillLightRef.current.position.set(
+      -2.5 - mx * 4.0,
+      -1.0 - my * 3.5,
+      3.0 - mx * 1.5,
+    );
   });
 
   return (
@@ -180,25 +273,14 @@ function HeadBlob({
       <directionalLight ref={fillLightRef} intensity={0.8} color={"#bcd3ff"} />
       <ambientLight intensity={0.2} />
 
-      {/* Start with a blob; it reads like a “head” once ASCII’d */}
-      <mesh ref={meshRef}>
-        <icosahedronGeometry args={[1.25, 6]} />
-        <meshStandardMaterial
-          color={"#ffffff"}
-          roughness={0.35}
-          metalness={0.05}
+      {orbs.map((orb, i) => (
+        <FloatingOrb
+          key={orb.id}
+          index={i}
+          initialPosition={orb.initialPosition}
+          reducedMotion={reducedMotion}
         />
-      </mesh>
-
-      {/* Optional “shoulders” silhouette to make it feel more head-like */}
-      <mesh position={[0, -1.55, 0]} rotation={[0, 0, 0]}>
-        <cylinderGeometry args={[1.4, 1.2, 0.9, 32]} />
-        <meshStandardMaterial
-          color={"#ffffff"}
-          roughness={0.45}
-          metalness={0.02}
-        />
-      </mesh>
+      ))}
     </>
   );
 }
@@ -214,6 +296,9 @@ export default function AsciiHero({
 }) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const pointer = useRef<Vec2>({ x: 0, y: 0 });
+  const createOrbAt = useRef<
+    ((normalizedX: number, normalizedY: number) => void) | null
+  >(null);
   const reducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -231,11 +316,40 @@ export default function AsciiHero({
       pointer.current = { x: 0, y: 0 };
     };
 
+    const onClick = (e: PointerEvent) => {
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 2 - 1;
+      const y = ((e.clientY - r.top) / r.height) * 2 - 1;
+      const normalizedX = clamp(x);
+      const normalizedY = clamp(y);
+
+      // Create new orb at click position
+      if (createOrbAt.current) {
+        createOrbAt.current(normalizedX, normalizedY);
+      }
+    };
+
     el.addEventListener("pointermove", onMove);
     el.addEventListener("pointerleave", onLeave);
+    el.addEventListener("click", onClick);
+    // Also handle touch events for mobile
+    el.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      const touch = e.changedTouches[0];
+      const r = el.getBoundingClientRect();
+      const x = ((touch.clientX - r.left) / r.width) * 2 - 1;
+      const y = ((touch.clientY - r.top) / r.height) * 2 - 1;
+      const normalizedX = clamp(x);
+      const normalizedY = clamp(y);
+
+      if (createOrbAt.current) {
+        createOrbAt.current(normalizedX, normalizedY);
+      }
+    });
     return () => {
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerleave", onLeave);
+      el.removeEventListener("click", onClick);
     };
   }, []);
 
@@ -264,7 +378,11 @@ export default function AsciiHero({
         camera={{ position: [0, 0.35, 3.4], fov: 42, near: 0.1, far: 100 }}
       >
         {/* Scene background stays transparent; you control bg via CSS or AsciiRenderer */}
-        <HeadBlob pointer={pointer} reducedMotion={reducedMotion} />
+        <FloatingOrbs
+          pointer={pointer}
+          createOrbAt={createOrbAt}
+          reducedMotion={reducedMotion}
+        />
         <AsciiRenderer fg={fg} bg={bg} resolution={0.16} />
       </Canvas>
 
