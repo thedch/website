@@ -1,6 +1,6 @@
 import { CreateMLCEngine, MLCEngine } from "@mlc-ai/web-llm";
 import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.js?url";
+import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import { useCallback, useEffect, useState } from "react";
 
 interface ProgressUpdate {
@@ -10,7 +10,7 @@ interface ProgressUpdate {
 }
 
 const MODEL_ID = "Qwen2.5-0.5B-Instruct-q4f16_1-MLC";
-const MAX_PDF_TOKENS = 10000;
+const MAX_PDF_TOKENS = 2800; // Leave room for system prompt, summary prompt, and response
 const APPROX_CHARS_PER_TOKEN = 4;
 const MAX_PDF_CHARS = MAX_PDF_TOKENS * APPROX_CHARS_PER_TOKEN;
 const SUMMARY_PROMPT =
@@ -106,7 +106,9 @@ export default function LocalInference() {
         return;
       }
 
-      const approxTokens = Math.ceil(trimmedText.length / APPROX_CHARS_PER_TOKEN);
+      const approxTokens = Math.ceil(
+        trimmedText.length / APPROX_CHARS_PER_TOKEN,
+      );
       setPdfText(trimmedText);
       setPdfTokenCount(approxTokens);
       setIsPdfTruncated(truncated);
@@ -136,11 +138,14 @@ export default function LocalInference() {
       try {
         const prompt = `${SUMMARY_PROMPT}\n\n${pdfText}`;
         const messages = [
-          { role: "system" as const, content: "You are a helpful AI assistant." },
+          {
+            role: "system" as const,
+            content: "You are a helpful AI assistant.",
+          },
           { role: "user" as const, content: prompt },
         ];
         const reply = await engine.chat.completions.create({ messages });
-        setPdfSummary(reply.choices[0].message.content);
+        setPdfSummary(reply.choices[0].message.content || "");
       } catch (error) {
         console.error("PDF summary failed:", error);
         setPdfSummaryError("Failed to summarize this PDF.");
@@ -197,7 +202,9 @@ export default function LocalInference() {
           />
           <button
             onClick={runInference}
-            disabled={isModelLoading || isInferencing || isSummarizing || !engine}
+            disabled={
+              isModelLoading || isInferencing || isSummarizing || !engine
+            }
             className={`mt-2 rounded bg-blue-500 px-4 py-2 text-white transition-colors ${
               isModelLoading || isInferencing || isSummarizing || !engine
                 ? "cursor-not-allowed opacity-50"
@@ -243,19 +250,50 @@ export default function LocalInference() {
         <div className="mt-6 border-t border-black/10 pt-4 dark:border-white/10">
           <div className="flex flex-col gap-2">
             <label className="text-sm font-semibold text-black dark:text-white">
-              Upload a PDF to summarize
+              Upload a PDF
             </label>
-            <input
-              type="file"
-              accept="application/pdf"
-              className="w-full rounded border border-black/15 bg-white p-2 text-sm text-black dark:border-white/20 dark:bg-neutral-800 dark:text-white"
-              disabled={
-                isModelLoading || isSummarizing || pdfStatus === "loading"
-              }
-              onChange={(event) =>
-                void handlePdfUpload(event.target.files?.[0] ?? null)
-              }
-            />
+            <div className="relative">
+              <input
+                type="file"
+                accept="application/pdf"
+                id="pdf-upload"
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
+                disabled={
+                  isModelLoading || isSummarizing || pdfStatus === "loading"
+                }
+                onChange={(event) =>
+                  void handlePdfUpload(event.target.files?.[0] ?? null)
+                }
+              />
+              <label
+                htmlFor="pdf-upload"
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-dashed border-black/20 bg-neutral-50 px-4 py-3 text-sm font-medium text-black transition-all hover:border-blue-500/50 hover:bg-blue-50/50 dark:border-white/20 dark:bg-neutral-900 dark:text-white dark:hover:border-blue-400/50 dark:hover:bg-blue-950/30 ${
+                  isModelLoading || isSummarizing || pdfStatus === "loading"
+                    ? "cursor-not-allowed opacity-50"
+                    : ""
+                }`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 shrink-0"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+                </svg>
+                <span className="truncate">
+                  {pdfStatus === "ready" && pdfName
+                    ? pdfName
+                    : "Choose PDF file"}
+                </span>
+              </label>
+            </div>
             {pdfStatus === "loading" && (
               <div className="text-sm text-black/60 dark:text-white/60">
                 Reading PDF content...
@@ -269,7 +307,8 @@ export default function LocalInference() {
             {pdfStatus === "ready" && pdfName && (
               <div className="text-sm text-black/60 dark:text-white/60">
                 Loaded: {pdfName} · ~{pdfTokenCount.toLocaleString()} tokens
-                {isPdfTruncated && " (truncated to ~10k tokens)"}
+                {isPdfTruncated &&
+                  ` (truncated to ~${MAX_PDF_TOKENS.toLocaleString()} tokens)`}
               </div>
             )}
             {isSummarizing && (
