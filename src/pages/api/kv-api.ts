@@ -1,8 +1,8 @@
 import type { APIContext } from "astro";
 
-export async function GET({ locals, request }: APIContext): Promise<Response> {
-  const blog = locals.runtime.env.blog as KVNamespace;
+export const prerender = false;
 
+export async function GET({ locals, request }: APIContext): Promise<Response> {
   const url = new URL(request.url);
   const key = url.searchParams.get("key");
 
@@ -13,6 +13,21 @@ export async function GET({ locals, request }: APIContext): Promise<Response> {
     });
   }
 
+  // Check if runtime is available (for Cloudflare Workers)
+  if (!locals.runtime?.env?.blog) {
+    return new Response(
+      JSON.stringify({
+        error:
+          "KV namespace not available. Make sure you're running in Cloudflare environment.",
+      }),
+      {
+        status: 503,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
+
+  const blog = locals.runtime.env.blog as KVNamespace;
   const value = await blog.get(key);
 
   return new Response(
@@ -27,6 +42,20 @@ export async function GET({ locals, request }: APIContext): Promise<Response> {
 }
 
 export async function POST({ locals, request }: APIContext): Promise<Response> {
+  // Check if runtime is available (for Cloudflare Workers)
+  if (!locals.runtime?.env?.blog) {
+    return new Response(
+      JSON.stringify({
+        error:
+          "KV namespace not available. Make sure you're running in Cloudflare environment.",
+      }),
+      {
+        status: 503,
+        headers: { "Content-Type": "application/json" },
+      },
+    );
+  }
+
   const blog = locals.runtime.env.blog as KVNamespace;
 
   try {

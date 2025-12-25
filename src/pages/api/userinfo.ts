@@ -1,5 +1,7 @@
 import type { APIContext } from "astro";
 
+export const prerender = false;
+
 export async function GET({
   request,
   clientAddress,

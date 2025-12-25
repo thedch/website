@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import { SITE, HOME, SOCIALS } from "@consts";
@@ -7,6 +9,7 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import HomeContent from "@content/home.mdx";
+import LazyAsciiBuddy from "@components/LazyAsciiBuddy";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -23,10 +26,13 @@ const projects = (await getCollection("projects"))
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-16">
-        <section>
+        <section class="grid items-start gap-6 lg:grid-cols-[1.6fr,1fr]">
           <article>
             <HomeContent />
           </article>
+          <div class="not-prose">
+            <LazyAsciiBuddy client:only="react" />
+          </div>
         </section>
 
         <section class="animate space-y-6">
