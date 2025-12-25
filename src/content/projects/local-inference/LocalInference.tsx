@@ -1,6 +1,5 @@
 import { CreateMLCEngine, MLCEngine } from "@mlc-ai/web-llm";
-import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+import { GlobalWorkerOptions, getDocument, version } from "pdfjs-dist";
 import { useCallback, useEffect, useState } from "react";
 
 interface ProgressUpdate {
@@ -16,7 +15,9 @@ const MAX_PDF_CHARS = MAX_PDF_TOKENS * APPROX_CHARS_PER_TOKEN;
 const SUMMARY_PROMPT =
   "Summarize the following PDF content in a concise paragraph.";
 
-GlobalWorkerOptions.workerSrc = pdfjsWorker;
+// PDF.js requires a web worker to parse PDFs (runs in separate thread to avoid blocking UI)
+// This must be set before calling getDocument()
+GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${version}/pdf.worker.min.mjs`;
 
 export default function LocalInference() {
   const [isInferencing, setIsInferencing] = useState(false);
