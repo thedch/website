@@ -13,7 +13,7 @@ export default defineConfig({
   site: "https://dch.xyz",
   integrations: [sitemap(), mdx(), icon(), react()],
   image: {
-    service: { entrypoint: "astro/assets/services/noop" },
+    service: { entrypoint: "astro/assets/services/compile" },
   },
   markdown: {
     // 1. Enable syntax highlighting with Shiki
