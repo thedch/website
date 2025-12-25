@@ -1,9 +1,18 @@
 ---
+export const prerender = true;
+
 import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
 import TableOfContents from "@components/TableOfContents.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
 
 const projects = await getCollection("projects");
 const project = projects.find((project) => project.slug === Astro.params.slug);

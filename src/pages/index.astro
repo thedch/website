@@ -1,4 +1,6 @@
 ---
+export const prerender = true;
+
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import { SITE, HOME, SOCIALS } from "@consts";
@@ -7,7 +9,7 @@ import Link from "@components/Link.astro";
 import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import HomeContent from "@content/home.mdx";
-import AsciiBuddy from "@components/AsciiBuddy";
+import LazyAsciiBuddy from "@components/LazyAsciiBuddy";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -29,7 +31,7 @@ const projects = (await getCollection("projects"))
             <HomeContent />
           </article>
           <div class="not-prose">
-            <AsciiBuddy client:only="react" />
+            <LazyAsciiBuddy client:only="react" />
           </div>
         </section>
 
