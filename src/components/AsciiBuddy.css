@@ -1,26 +1,13 @@
-.ascii-buddy-wrapper {
-  animation: ascii-sway 8s ease-in-out infinite;
-  transform-origin: center;
+.heroAscii {
+  /* match your hero area */
+  height: min(520px, 60vh);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
 }
-
-.ascii-buddy-wrapper.paused {
-  animation-play-state: paused;
-}
-
-@keyframes ascii-sway {
-  0% {
-    transform: translateY(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-3px) rotate(-1.5deg);
-  }
-  50% {
-    transform: translateY(2px) rotate(1.5deg);
-  }
-  75% {
-    transform: translateY(-2px) rotate(-1deg);
-  }
-  100% {
-    transform: translateY(0) rotate(0deg);
+@media (prefers-color-scheme: dark) {
+  .heroAscii {
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(10, 10, 10, 0.35);
   }
 }
