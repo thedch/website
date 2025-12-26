@@ -5,11 +5,9 @@
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
 }
-@media (prefers-color-scheme: dark) {
-  .heroAscii {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(10, 10, 10, 0.35);
-  }
+.dark .heroAscii {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(10, 10, 10, 0.35);
 }
 
 .asciiCaption {
@@ -25,8 +23,6 @@
   font-style: italic;
 }
 
-@media (prefers-color-scheme: dark) {
-  .asciiCaption {
-    color: rgba(255, 255, 255, 0.5);
-  }
+.dark .asciiCaption {
+  color: rgba(255, 255, 255, 0.5);
 }

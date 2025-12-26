@@ -27,6 +27,23 @@ function usePrefersReducedMotion() {
   return reduced;
 }
 
+function useDarkMode() {
+  const [isDark, setIsDark] = useState(false);
+  useEffect(() => {
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    };
+    checkDarkMode();
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
+  return isDark;
+}
+
 /**
  * This component replaces WebGL rendering with ASCII rendering.
  * It still uses the WebGL renderer internally, but draws via AsciiEffect.
@@ -288,7 +305,7 @@ function FloatingOrbs({
 
 export default function AsciiHero({
   className,
-  fg = "#1a1a1a",
+  fg,
   bg = "transparent",
 }: {
   className?: string;
@@ -301,6 +318,8 @@ export default function AsciiHero({
     ((normalizedX: number, normalizedY: number) => void) | null
   >(null);
   const reducedMotion = usePrefersReducedMotion();
+  const isDark = useDarkMode();
+  const foregroundColor = fg || (isDark ? "#e5e5e5" : "#1a1a1a");
 
   useEffect(() => {
     const el = wrapperRef.current;
@@ -385,7 +404,7 @@ export default function AsciiHero({
             createOrbAt={createOrbAt}
             reducedMotion={reducedMotion}
           />
-          <AsciiRenderer fg={fg} bg={bg} resolution={0.16} />
+          <AsciiRenderer fg={foregroundColor} bg={bg} resolution={0.16} />
         </Canvas>
 
         {/* Optional: a subtle fade to integrate with page */}
