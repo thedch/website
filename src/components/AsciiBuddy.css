@@ -11,3 +11,22 @@
     background: rgba(10, 10, 10, 0.35);
   }
 }
+
+.asciiCaption {
+  margin-top: 8px;
+  font-size: 11px;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: 400;
+  font-style: italic;
+}
+
+@media (prefers-color-scheme: dark) {
+  .asciiCaption {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}

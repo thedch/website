@@ -2,6 +2,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { AsciiEffect } from "three/examples/jsm/effects/AsciiEffect.js";
+import "./AsciiBuddy.css";
 
 type Vec2 = { x: number; y: number };
 
@@ -354,49 +355,54 @@ export default function AsciiHero({
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      className={className}
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "420px",
-        overflow: "hidden",
-        borderRadius: "24px",
-      }}
-      aria-label="ASCII hero animation"
-      role="img"
-    >
-      <Canvas
-        // keep DPR low for crisp ASCII + less work
-        dpr={1}
-        gl={{
-          antialias: true,
-          alpha: true,
-          powerPreference: "high-performance",
-        }}
-        camera={{ position: [0, 0.35, 3.4], fov: 42, near: 0.1, far: 100 }}
-      >
-        {/* Scene background stays transparent; you control bg via CSS or AsciiRenderer */}
-        <FloatingOrbs
-          pointer={pointer}
-          createOrbAt={createOrbAt}
-          reducedMotion={reducedMotion}
-        />
-        <AsciiRenderer fg={fg} bg={bg} resolution={0.16} />
-      </Canvas>
-
-      {/* Optional: a subtle fade to integrate with page */}
+    <div className={className}>
       <div
-        aria-hidden
+        ref={wrapperRef}
+        className="asciiWrapper"
         style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.06) 80%, rgba(0,0,0,0.10) 100%)",
-          pointerEvents: "none",
+          position: "relative",
+          width: "100%",
+          height: "420px",
+          overflow: "hidden",
+          borderRadius: "24px",
         }}
-      />
+        aria-label="ASCII hero animation"
+        role="img"
+      >
+        <Canvas
+          // keep DPR low for crisp ASCII + less work
+          dpr={1}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference: "high-performance",
+          }}
+          camera={{ position: [0, 0.35, 3.4], fov: 42, near: 0.1, far: 100 }}
+        >
+          {/* Scene background stays transparent; you control bg via CSS or AsciiRenderer */}
+          <FloatingOrbs
+            pointer={pointer}
+            createOrbAt={createOrbAt}
+            reducedMotion={reducedMotion}
+          />
+          <AsciiRenderer fg={fg} bg={bg} resolution={0.16} />
+        </Canvas>
+
+        {/* Optional: a subtle fade to integrate with page */}
+        <div
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(60% 60% at 50% 40%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.06) 80%, rgba(0,0,0,0.10) 100%)",
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+
+      {/* Caption */}
+      <div className="asciiCaption">click to add more orbs :)</div>
     </div>
   );
 }
