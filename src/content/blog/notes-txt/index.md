@@ -4,10 +4,9 @@ date: "2025-12-25"
 draft: false
 ---
 
-I am a bit of a productivity enthusiast. I love life hacks, trying new task management apps, and finding ways to get more done in less time.
-Trello, Asana, Roam Research, Notion, Reminders, Things -- the list of apps that I've experimented with is extensive.
+I’m a bit of a productivity enthusiast. I enjoy life hacks, experimenting with task-management systems, and finding ways to get more done with less friction. Over the years I’ve tried just about everything: Trello, Asana, Roam Research, Notion, Reminders, Things—the list is long.
 
-My general findings are that the midwit meme is correct:
+My main conclusion is that the midwit meme is correct:
 
 <div class="max-w-md mx-auto">
 
@@ -15,30 +14,34 @@ My general findings are that the midwit meme is correct:
 
 </div>
 
-Over time, I've converged to a simple and flexible system: every day, I open `~/Documents/notes.txt` and add things to the bottom.
-I have found this to have a surprising number of benefits and provide a lot of peace of mind.
-I am not aware of many people I know using this sort of system, so I thought I'd write about it.
+After a lot of experimentation, I’ve converged on a system that is deslightfully simple: every day, I open `~/Documents/notes.txt` and add to the bottom of the file.
 
-There are a few specific techniques I've found helpful:
+Despite (or because of) its simplicity, this has turned out to be one of the most effective productivity tools I’ve ever used. It gives me a surprising amount of clarity and peace of mind. I don’t know many people who work this way, so I thought it was worth writing about.
 
-- I have a `~/Documents/notes.txt` on all laptops I own (usually work + personal). I don't feel the need to sync them -- keeping them separate is a feature.
-- I mark each new days notes with triple hashtags, e.g. `### Dec 14`. This allows me to Cmd+F for `###` and jump through the days.
-- I treat this file as a general stream of consciousness. I often arrive at work with various urgent things on my mind, and the first thing I do is dump all my thoughts into this file and organize into a somewhat structured plan for the day.
-- A decent part of my job is running a script with many arguments, waiting some number of minutes/hours/days, reviewing the outputs, and repeating. As such, pasting the command into `notes.txt` before I run it provides a great record of when I ran different things, moreso than my zsh `HISTFILE`. I often need to run a script and can search for the name in my `notes.txt`, review the last few times I ran it, and construct the command I need. Looking back, I am kind of amazed I got anything done before this.
-- In standard Markdown, I mark TODOs with `[ ]` and then add `[x]` when they're completed.
-- I've tried separating this into a few files, for example `todos.txt` and `thoughts.txt` etc. I found this to be annoying and not worth it. Having different files to switch between caused more friction than benefits.
-- Having a catch all scratch pad is a great improvement to my task tracking. Ever have a coworker stop by your desk with some urgent task or fire that needs attention? I simple summarize their narration into my notes file, have them confirm I have the correct context, and am able to take action as needed. Same for other details that get mentioned in a meeting or in passing -- I have a dedicated place to store them and can easily scroll back over past days.
-- Performance reviews become easier as well: I can instantly dig up exactly what I did every week last year, and convert that into an impact statement.
-- I've picked a few keywords that I try to keep reserved for easy Cmd+F. For example, if there's some difficult undocumented internal process I regularly get annoyed by, I will write `Tutorial: ...` in my notes, followed by whatever instructions I need. The next time I run into the issue, flipping through all instances of the word `Tutorial` only takes a few seconds to find what I'm looking for.[^1] I've seen other people use hashtags for this sort of thing, but that's never really landed for me -- but it seems like a great addition.
+## The System
 
-A simple example file looks like this:
+Here are a few concrete practices that make this work well for me:
+
+- I keep a `~/Documents/notes.txt` file on every laptop I use (usually work and personal). I don’t bother syncing them, keeping them separate is a feature.
+- Each day starts with a header like `### Dec 14`. This makes it easy to jump between days with a simple Cmd+F for `###`.
+- The file is a general stream of consciousness. I often arrive at work with a pile of half-formed thoughts and concerns. The first thing I do is dump everything into this file, then shape it into a rough plan for the day.
+- A big part of my job involves running scripts with many arguments, waiting minutes or hours, inspecting outputs, and iterating. Pasting commands into `notes.txt` before running them gives me a much better historical record than my shell history. When I need to re-run something, I can search for the script name, review past invocations, and reconstruct the exact command I want. In retrospect, I'm not sure how I functioned before doing this.
+- I use standard Markdown checkboxes: `[ ]` for TODOs, `[x]` for completed items.
+- I’ve tried splitting this into multiple files (`todos.txt`, `thoughts.txt`, etc.). It never stuck. Switching between files added more friction than it removed.
+- Having a single catch-all scratch pad dramatically improves task tracking. When a coworker drops by with an urgent request, I summarize what they’re saying directly into my notes, confirm I’ve captured the context correctly, and move on. The same goes for details mentioned in meetings or in passing — I always have a single place to jot them down.
+- Performance reviews become easier too. I can reconstruct exactly what I worked on week by week and turn that directly into impact statements.
+- I reserve a few keywords for easy searching. For example, when I encounter a painful, undocumented internal process, I’ll write `Tutorial:` followed by the steps I needed. Later, a quick Cmd+F through `Tutorial` entries gets me quickly unstuck.[^1] Some people use hashtags for this; that never quite clicked for me, but it’s a solid variation on the idea.
+
+## Example
+
+A typical section of my file looks like this:
 
 ```txt
 $ cat ~/Documents/notes.txt
 
 ### Sept 14
 
-[ ] Check in with Michael about the database migration -- what needs to happen there?
+[ ] Check in with Michael about the database migration — what needs to happen there?
 [ ] Review Allen's PR
 
 [ ] Test big_script, is it still broken?
@@ -49,13 +52,12 @@ uv run pipeline/scripts/big_script.py \
     --gcs-bucket big-script-runs
 
 [ ] Submit interview feedback
-[ ] Respond to that memo from security team
-[ ] Prep slides for tmrw's meeting
+[ ] Respond to memo from security team
+[ ] Prep slides for tomorrow’s meeting
 ```
 
-I find that the more I add to it, the most valuable this file becomes.
-I've followed this system for about 5 years now, over several jobs, and it's always really helped me.
+The more I use this file, the more valuable it becomes. I’ve followed this system for about five years, across multiple jobs, and it has consistently paid off.
 
-Try it and see if it helps you!
+If you’ve bounced between productivity tools and never quite found something that sticks, try this. It’s hard to get simpler than a text file!
 
 [^1]: As a bonus, this is a great indication of where it would be useful to add more internal documentation or improve the process for the rest of my team. If I have a bit of down time, I can pick the highest impact "Tutorial" I've written and convert it to something accessible to the whole company (or automate the process entirely, etc).
