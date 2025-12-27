@@ -1,6 +1,5 @@
 ---
 title: "My Learnings and Beliefs"
-description: "A collection of micro thoughts"
 date: "2025-09-13"
 draft: false
 ---
