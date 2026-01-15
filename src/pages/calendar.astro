@@ -1,0 +1,31 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/Container.astro";
+import ThreeMonthCalendar from "@components/ThreeMonthCalendar";
+
+const pageTitle = "Three-Month Calendar";
+const pageDescription =
+  "Plan multi-day events across a three-month window and see them highlighted in a summer calendar view.";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Container>
+    <section class="space-y-6">
+      <header class="space-y-2">
+        <p class="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          Planning view
+        </p>
+        <h1 class="text-3xl font-semibold text-slate-900 dark:text-white">
+          Summer schedule board
+        </h1>
+        <p class="max-w-2xl text-base text-slate-600 dark:text-slate-300">
+          Track events across three months at once, then add multi-day events to
+          visualize what happens throughout the season.
+        </p>
+      </header>
+      <div class="not-prose">
+        <ThreeMonthCalendar client:only="react" />
+      </div>
+    </section>
+  </Container>
+</Layout>
