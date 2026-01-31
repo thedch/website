@@ -103,12 +103,7 @@ const projects = (await getCollection("projects"))
             </li>
             <li class="flex items-center gap-x-2">
               <Icon name="mdi:email" class="h-5 w-5" />
-              <Link
-                href={`mailto:${SITE.EMAIL}`}
-                aria-label={`Email ${SITE.TITLE}`}
-              >
-                {SITE.EMAIL}
-              </Link>
+              <span>{SITE.EMAIL_DISPLAY}</span>
             </li>
           </ul>
         </section>
