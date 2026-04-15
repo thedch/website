@@ -14,7 +14,7 @@ My main conclusion is that the midwit meme is correct:
 
 </div>
 
-After a lot of experimentation, I’ve converged on a system that is deslightfully simple: every day, I open `~/Documents/notes.txt` and add to the bottom of the file.
+After a lot of experimentation, I’ve converged on a system that is delightfully simple: every day, I open `~/Documents/notes.txt` and add to the bottom of the file.
 
 Despite (or because of) its simplicity, this has turned out to be one of the most effective productivity tools I’ve ever used. It gives me a surprising amount of clarity and peace of mind. I don’t know many people who work this way, so I thought it was worth writing about.
 
@@ -60,4 +60,4 @@ The more I use this file, the more valuable it becomes. I’ve followed this sys
 
 If you’ve bounced between productivity tools and never quite found something that sticks, try this. It’s hard to get simpler than a text file!
 
-[^1]: As a bonus, this is a great indication of where it would be useful to add more internal documentation or improve the process for the rest of my team. If I have a bit of down time, I can pick the highest impact "Tutorial" I've written and convert it to something accessible to the whole company (or automate the process entirely, etc).
+[^1]: As a bonus, this is a great indication of where it would be useful to add more internal documentation or improve the process for the rest of my team. If I have a bit of downtime, I can pick the highest impact "Tutorial" I've written and convert it to something accessible to the whole company (or automate the process entirely, etc).

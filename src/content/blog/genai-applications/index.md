@@ -9,13 +9,13 @@ draft: false
 
 I've talked to a lot of people deploying generative AI in different applications and industries. I think there's a lot of wrong ways to use generative AI, that maybe aren't necessarily obvious.
 
-When I was between Tesla and Harvey, figuring out what I wanted to do next, I tried to think a lot about the "first principles" (I know, sorry) ideal application of gen AI. What are the attributes that are useful?
+When I was between Tesla and Harvey, figuring out what I wanted to do next, I tried to think a lot about the "first principles" (I know, sorry) ideal applications of gen AI. What are the attributes that are useful?
 
 Let's outline several key features that I think were important for Harvey's success, and discuss the general underlying principles.
 
 1. Incremental value delivery (human in the loop)
 1. Text is the product
-1. Defensible -- chatGPT alone isn't enough, needs some unique vertical integration
+1. Defensible -- ChatGPT alone isn't enough, needs some unique vertical integration
 1. High revenue, large market, repetitive workflows
 
 ## Incremental value delivery
