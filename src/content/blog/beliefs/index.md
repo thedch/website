@@ -26,7 +26,7 @@ Wouldn't you want that?
 An easy example of this: if you believe you are fully responsible for how your life goes, this brings a lot of agency.
 You can make excuses and argue why something wasn't your fault - but if you always just take responsibility, this enables a lot of growth.
 
-Another example: if believe that God (or "The Universe") is looking out for you and wants you to have a great life, this enables a lot of optimism, and your life will be better.
+Another example: if you believe that God (or "The Universe") is looking out for you and wants you to have a great life, this enables a lot of optimism, and your life will be better.
 
 This is similar to the Rationalist vs Post-Rationalist philosophy -- instead of fixating on correctness, figure out what your end goal is, and then contemplate if any given idea is useful for that goal.
 
