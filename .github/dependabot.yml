@@ -6,3 +6,7 @@ updates:
       interval: "weekly"
     cooldown:
       default: 14
+    ignore:
+      # @astrojs/cloudflare@13+ requires astro@^6 — ignore until ready to upgrade
+      - dependency-name: "@astrojs/cloudflare"
+        versions: [">=13"]
