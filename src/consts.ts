@@ -33,11 +33,6 @@ export const SOCIALS: Socials = [
     ICON: "mdi:file-excel-box",
   },
   {
-    NAME: "GitHub",
-    HREF: "https://github.com/thedch",
-    ICON: "mdi:github",
-  },
-  {
     NAME: "LinkedIn",
     HREF: "https://www.linkedin.com/in/thedch",
     ICON: "mdi:linkedin",
