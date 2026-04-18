@@ -1,0 +1,254 @@
+---
+
+---
+
+<section class="animate career-timeline-section space-y-8">
+  <div class="timeline not-prose">
+    <div class="entry">
+      <div class="yr">2018</div>
+      <div class="dot"></div>
+      <div class="role">Engineer · <span class="co">DeepScale</span></div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">Computer Vision for autonomous vehicles.</div>
+        <div class="tags">
+          <span class="tag tag-acq">Acquired by Tesla</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="yr">2019</div>
+      <div class="dot"></div>
+      <div class="role">
+        Senior Machine Learning Scientist · <span class="co">Tesla</span>
+      </div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">Helped build and ship Full Self Driving.</div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="yr">2022</div>
+      <div class="dot"></div>
+      <div class="role">Transition Team · <span class="co">X</span></div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">
+          Helped navigate the transition as Twitter was acquired and converted
+          to X.
+        </div>
+        <div class="tags">
+          <span class="tag tag-acq">Acquired Twitter → X</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="yr">2023</div>
+      <div class="dot"></div>
+      <div class="role">
+        Founding Research Scientist, Head of AI · <span class="co">Harvey</span>
+      </div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">
+          Built out several product lines, scaled the AI org from zero to 10+
+          engineers. Seed stage to post Series C.
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="yr">2025</div>
+      <div class="dot"></div>
+      <div class="role">Research · <span class="co">xAI</span></div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">
+          Frontier language modeling and product development. Shipped the first
+          memory & personalization features.
+        </div>
+        <div class="tags">
+          <span class="tag tag-acq">Acquired X (again)</span>
+          <span class="tag tag-acq">Acquired by SpaceX</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="yr">now</div>
+      <div class="dot"></div>
+      <div class="role">Exploring · <span class="co">what's next</span></div>
+      <div class="line"></div>
+      <div class="details">
+        <div class="desc">
+          Exploring my next adventure in hard tech. Some early-stage investing.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-heading {
+    font-family: var(--font-family-mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgb(0 0 0 / 0.25);
+  }
+
+  :global(.dark) .timeline-heading {
+    color: rgb(255 255 255 / 0.2);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 2-row × 3-col grid: [year | dot-col | content] */
+  .entry {
+    display: grid;
+    grid-template-columns: 44px 24px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  /* Row 1: year, dot, role — all center-aligned automatically */
+  .yr {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    text-align: right;
+    font-family: var(--font-family-mono);
+    font-size: 11px;
+    color: rgb(0 0 0 / 0.3);
+    letter-spacing: 0.04em;
+    user-select: none;
+  }
+
+  :global(.dark) .yr {
+    color: rgb(255 255 255 / 0.25);
+  }
+
+  .dot {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgb(0 0 0 / 0.2);
+    flex-shrink: 0;
+  }
+
+  :global(.dark) .dot {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  .role {
+    grid-column: 3;
+    grid-row: 1;
+    align-self: center;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(0 0 0 / 0.55);
+    line-height: 1.4;
+    padding: 4px 0;
+  }
+
+  :global(.dark) .role {
+    color: rgb(255 255 255 / 0.5);
+  }
+
+  .co {
+    color: rgb(0 0 0 / 0.82);
+    font-weight: 600;
+  }
+
+  :global(.dark) .co {
+    color: rgb(255 255 255 / 0.82);
+  }
+
+  /* Row 2: spine line + details */
+  .line {
+    grid-column: 2;
+    grid-row: 2;
+    justify-self: center;
+    width: 1px;
+    background: rgb(0 0 0 / 0.1);
+  }
+
+  :global(.dark) .line {
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  .entry:last-child .line {
+    background: transparent;
+  }
+
+  .details {
+    grid-column: 3;
+    grid-row: 2;
+    padding-top: 4px;
+    padding-bottom: 28px;
+  }
+
+  .entry:last-child .details {
+    padding-bottom: 0;
+  }
+
+  .desc {
+    font-size: 13.5px;
+    font-weight: 400;
+    color: rgb(0 0 0 / 0.5);
+    line-height: 1.65;
+  }
+
+  :global(.dark) .desc {
+    color: rgb(255 255 255 / 0.4);
+  }
+
+  /* Tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 9px;
+  }
+
+  .tag {
+    font-family: var(--font-family-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 2px;
+    border: 1px solid rgb(0 0 0 / 0.15);
+    color: rgb(0 0 0 / 0.35);
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .tag {
+    border-color: rgb(255 255 255 / 0.12);
+    color: rgb(255 255 255 / 0.3);
+  }
+
+  .tag-acq {
+    color: rgb(35 120 30 / 0.5);
+    border-color: rgb(35 120 30 / 0.28);
+    background: rgb(35 120 30 / 0.04);
+    font-weight: 600;
+  }
+
+  :global(.dark) .tag-acq {
+    color: rgb(140 210 120 / 0.5);
+    border-color: rgb(140 210 120 / 0.18);
+    background: rgb(140 210 120 / 0.04);
+  }
+</style>
