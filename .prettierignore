@@ -15,6 +15,7 @@ yarn.lock
 
 # Wrangler
 .wrangler/
+worker-configuration.d.ts
 
 # Other
 .DS_Store

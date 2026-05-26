@@ -10,7 +10,7 @@ const CloudflareTester: React.FC = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      const data = (await response.json()) as { value?: string };
       setGameBoard(data.value || "0".repeat(25));
       setError(null);
     } catch (error) {

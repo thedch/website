@@ -64,7 +64,7 @@ export default function UserInfo() {
         const response = await fetch("/api/userinfo");
         if (!response.ok) throw new Error("Failed to fetch user information");
 
-        const data = await response.json();
+        const data = (await response.json()) as UserInfoData;
         setServerData(data);
 
         const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;

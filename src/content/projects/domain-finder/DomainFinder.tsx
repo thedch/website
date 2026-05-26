@@ -70,7 +70,7 @@ const DomainFinderComponent: React.FC = () => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data = await response.json();
+      const data = (await response.json()) as { value: string };
       setSavedValue(data.value);
       setError(null);
     } catch (error) {

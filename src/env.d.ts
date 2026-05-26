@@ -1,16 +1,7 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
+/// <reference path="../worker-configuration.d.ts" />
 
-type KVNamespace = import("@cloudflare/workers-types").KVNamespace;
-
-// This is configured in:
-// Cloudflare Workers & Pages -> Pages -> Settings -> Bindings
-type ENV = {
-  blog: KVNamespace;
-};
-
-// use a default runtime configuration (advanced mode).
-type Runtime = import("@astrojs/cloudflare").Runtime<ENV>;
-declare namespace App {
-  interface Locals extends Runtime {}
-}
+// Cloudflare binding types (`Env`, `KVNamespace`, etc.) are generated into
+// worker-configuration.d.ts by `wrangler types`. Access bindings via
+// `import { env } from "cloudflare:workers"`.

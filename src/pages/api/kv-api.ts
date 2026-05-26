@@ -1,8 +1,9 @@
 import type { APIContext } from "astro";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-export async function GET({ locals, request }: APIContext): Promise<Response> {
+export async function GET({ request }: APIContext): Promise<Response> {
   const url = new URL(request.url);
   const key = url.searchParams.get("key");
 
@@ -13,8 +14,8 @@ export async function GET({ locals, request }: APIContext): Promise<Response> {
     });
   }
 
-  // Check if runtime is available (for Cloudflare Workers)
-  if (!locals.runtime?.env?.blog) {
+  // Check if the KV binding is available (only in the Cloudflare environment)
+  if (!env.blog) {
     return new Response(
       JSON.stringify({
         error:
@@ -27,7 +28,7 @@ export async function GET({ locals, request }: APIContext): Promise<Response> {
     );
   }
 
-  const blog = locals.runtime.env.blog as KVNamespace;
+  const blog = env.blog;
   const value = await blog.get(key);
 
   return new Response(
@@ -41,9 +42,9 @@ export async function GET({ locals, request }: APIContext): Promise<Response> {
   );
 }
 
-export async function POST({ locals, request }: APIContext): Promise<Response> {
-  // Check if runtime is available (for Cloudflare Workers)
-  if (!locals.runtime?.env?.blog) {
+export async function POST({ request }: APIContext): Promise<Response> {
+  // Check if the KV binding is available (only in the Cloudflare environment)
+  if (!env.blog) {
     return new Response(
       JSON.stringify({
         error:
@@ -56,10 +57,13 @@ export async function POST({ locals, request }: APIContext): Promise<Response> {
     );
   }
 
-  const blog = locals.runtime.env.blog as KVNamespace;
+  const blog = env.blog;
 
   try {
-    const { key, value } = await request.json();
+    const { key, value } = (await request.json()) as {
+      key?: string;
+      value?: string;
+    };
 
     if (!key || !value) {
       return new Response(

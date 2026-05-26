@@ -1,7 +1,7 @@
 ---
 export const prerender = true;
 
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import BackToPrevious from "@components/BackToPrevious.astro";
@@ -10,16 +10,16 @@ import TableOfContents from "@components/TableOfContents.astro";
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { slug: project.id },
   }));
 }
 
 const projects = await getCollection("projects");
-const project = projects.find((project) => project.slug === Astro.params.slug);
+const project = projects.find((project) => project.id === Astro.params.slug);
 
 if (!project) return Astro.redirect("/404");
 
-const { Content, headings } = await project.render();
+const { Content, headings } = await render(project);
 ---
 
 <Layout title={project.data.title}>

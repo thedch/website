@@ -77,6 +77,17 @@ export default defineConfig({
   }),
   vite: {
     plugins: [tailwindcss()],
+    resolve: {
+      // Astro 6 + @astrojs/cloudflare run dev/SSR/prerender in the workerd
+      // runtime, which has no CommonJS `module` global. The transitive `debug`
+      // dependency (pulled via micromark and astro-icon) references
+      // `module.exports` at load time, crashing every markdown/icon route with
+      // "module is not defined". Alias it to an ESM (obug) shim until fixed
+      // upstream. https://github.com/expressive-code/expressive-code/issues/439
+      alias: {
+        debug: new URL("./src/shims/debug.js", import.meta.url).pathname,
+      },
+    },
     build: {
       modulePreload: {
         polyfill: false,
