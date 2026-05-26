@@ -95,20 +95,16 @@ export default function UserInfo() {
           client.deviceMemory = `${deviceMemory} GB`;
         }
 
-        // @ts-ignore - connection is not in all browsers
+        const nav = navigator as any;
         const connection =
-          navigator.connection ||
-          navigator.mozConnection ||
-          navigator.webkitConnection;
+          nav.connection || nav.mozConnection || nav.webkitConnection;
         if (connection?.effectiveType) {
           client.connectionType = connection.effectiveType;
         }
 
-        // Battery status
-        // @ts-ignore - getBattery is not in all browsers
-        if (navigator.getBattery) {
-          // @ts-ignore
-          navigator
+        // Battery status (non-standard API)
+        if (nav.getBattery) {
+          nav
             .getBattery()
             .then((battery: any) => {
               const level = Math.round(battery.level * 100);
@@ -237,8 +233,8 @@ export default function UserInfo() {
         </h2>
         <div className="space-y-2">
           <p className="text-sm text-gray-600 dark:text-gray-300">
-            Using Cloudflare headers when available. You can optionally share your browser’s precise location to improve the
-            results.
+            Using Cloudflare headers when available. You can optionally share
+            your browser’s precise location to improve the results.
           </p>
           <div className="flex flex-wrap items-center gap-3">
             <button
@@ -249,7 +245,9 @@ export default function UserInfo() {
               Use browser location
             </button>
             {geoStatus && (
-              <span className="text-sm text-gray-600 dark:text-gray-400">{geoStatus}</span>
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                {geoStatus}
+              </span>
             )}
           </div>
         </div>
@@ -258,16 +256,8 @@ export default function UserInfo() {
           <InfoItem label="City" value={serverData.location.city} />
           <InfoItem label="Region" value={serverData.location.region} />
           <InfoItem label="Timezone" value={timezoneDisplay} />
-          <InfoItem
-            label="Latitude"
-            value={latitudeDisplay}
-            mono
-          />
-          <InfoItem
-            label="Longitude"
-            value={longitudeDisplay}
-            mono
-          />
+          <InfoItem label="Latitude" value={latitudeDisplay} mono />
+          <InfoItem label="Longitude" value={longitudeDisplay} mono />
         </div>
       </section>
 

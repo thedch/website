@@ -10,6 +10,7 @@ import { getCollection } from "astro:content";
 import { Icon } from "astro-icon/components";
 import HomeContent from "@content/home.mdx";
 import LazyAsciiBuddy from "@components/LazyAsciiBuddy";
+import CareerTimeline from "@components/CareerTimeline.astro";
 
 const blog = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -26,22 +27,50 @@ const projects = (await getCollection("projects"))
   <Container>
     <aside data-pagefind-ignore>
       <div class="space-y-16">
-        <section class="grid items-start gap-6 lg:grid-cols-[1.6fr,1fr]">
+        <section>
           <article>
             <HomeContent />
           </article>
-          <div class="not-prose">
-            <LazyAsciiBuddy client:only="react" />
-          </div>
+        </section>
+
+        <section class="animate space-y-6">
+          <h2 class="font-semibold text-black dark:text-white">Career</h2>
+          <article>
+            <p>
+              If you're here to understand who I am and what I've worked on — my
+              background:
+            </p>
+          </article>
+          <CareerTimeline />
+        </section>
+
+        <section class="not-prose animate">
+          <LazyAsciiBuddy client:only="react" />
         </section>
 
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Latest Posts
-            </h2>
-            <Link href="/blog"> See all posts </Link>
+            <h2 class="font-semibold text-black dark:text-white">Writing</h2>
+            <Link href="/blog">See all posts</Link>
           </div>
+          <article>
+            <p>
+              I write to clarify my thinking. Publishing forces rigor,
+              encourages better reasoning, and helps me share what I wish I knew
+              years ago.
+            </p>
+            <p>Topics include:</p>
+            <ul>
+              <li>product development and engineering challenges</li>
+              <li>psychology of building great products</li>
+              <li>scaling startups and org design</li>
+              <li>modern ML research and practical implementation work</li>
+            </ul>
+            <p>
+              I write in a build-in-public style — some posts polished, some
+              exploratory.
+            </p>
+          </article>
           <ul class="not-prose flex flex-col gap-4">
             {
               blog.map((post) => (
@@ -55,11 +84,23 @@ const projects = (await getCollection("projects"))
 
         <section class="animate space-y-6">
           <div class="flex flex-wrap items-center justify-between gap-y-2">
-            <h2 class="font-semibold text-black dark:text-white">
-              Recent Projects
-            </h2>
-            <Link href="/projects"> See all projects </Link>
+            <h2 class="font-semibold text-black dark:text-white">Projects</h2>
+            <Link href="/projects">See all projects</Link>
           </div>
+          <article>
+            <p>
+              As software approaches zero marginal cost, the pipeline from idea
+              → prototype → live on the internet has never been easier. Thinking
+              of the browser as "a way to let other people run my code
+              instantly" makes tinkering fun.
+            </p>
+            <p>
+              Not everything here is production-grade — some things are just
+              experiments. Recently I've been exploring local-first LLM
+              inference, WebGPU acceleration, and running small models directly
+              in the browser.
+            </p>
+          </article>
           <ul class="not-prose flex flex-col gap-4">
             {
               projects.map((project) => (
@@ -72,12 +113,11 @@ const projects = (await getCollection("projects"))
         </section>
 
         <section id="contact-info" class="animate space-y-4">
-          <h2 class="font-semibold text-black dark:text-white">Contact Info</h2>
+          <h2 class="font-semibold text-black dark:text-white">Contact</h2>
           <article>
             <p>
               If you want to get in touch with me about something or just to say
-              hi, reach out on social media or send me an email. I'm always open
-              to meeting new people and interesting conversations.
+              hi, feel free to send me an email or DM.
             </p>
           </article>
           <ul class="not-prose flex flex-col gap-2">
