@@ -57,6 +57,7 @@
   "overrides": {
     "astro-icon": {
       "@iconify/tools": "^4.0.0"
-    }
+    },
+    "yaml": "^2.8.3"
   }
 }
